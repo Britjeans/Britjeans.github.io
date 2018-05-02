@@ -1,254 +1,215 @@
 <!DOCTYPE html>
-<html lang="en">
-
-<!-- Head tag -->
+<html>
 <head>
+  <meta charset="utf-8">
+  
+  <title>Graph Study Notes 2 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Minimum Spanning Tree Shortest Paths Connectivity in a directed graph  Minimum Spanning TreeGiven a connected and undirected graph, a spanning tree of that graph is a subgraph that is a tree and conn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graph Study Notes 2">
+<meta property="og:url" content="http://yoursite.com/2018/05/02/Graph-Study-Notes-2/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Minimum Spanning Tree Shortest Paths Connectivity in a directed graph  Minimum Spanning TreeGiven a connected and undirected graph, a spanning tree of that graph is a subgraph that is a tree and conn">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-02T12:37:55.900Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Graph Study Notes 2">
+<meta name="twitter:description" content="Minimum Spanning Tree Shortest Paths Connectivity in a directed graph  Minimum Spanning TreeGiven a connected and undirected graph, a spanning tree of that graph is a subgraph that is a tree and conn">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/tocas.css">
+  <link rel="stylesheet" href="/css/animate.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
 
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
 
-    <!--Description-->
-    
+    #menu-color-id{
+        background : #f7f7f7;
+    }
 
-    <!--Author-->
-    
-        <meta name="author" content="John Doe">
-    
+    #menu-color-id a{
+        color: #5a5a5a;
+    }
+  </style>
+  <script src="/js/tocas.js"></script>
+  
 
-    <!--Open Graph Title-->
-    
-        <meta property="og:title" content="Graph Study Notes 2"/>
-    
-
-    <!--Open Graph Description-->
-    
-
-    <!--Open Graph Site Name-->
-    <meta property="og:site_name" content="Hexo"/>
-
-    <!--Type page-->
-    
-        <meta property="og:type" content="article" />
-    
-
-    <!--Page Cover-->
-    
-
-        <meta name="twitter:card" content="summary" />
-    
-
-    <!-- Title -->
-    
-    <title>Graph Study Notes 2 - Hexo</title>
-
-    <!-- Bootstrap Core CSS -->
-    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/style.css">
-
-    <!-- Custom Fonts -->
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Gallery -->
-    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
-    
-
-
-    <!-- favicon -->
-    
-	
 </head>
 
-
 <body>
+<!-- navigation -->
 
-    <!-- Menu -->
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/">Configurable Title</a>
-        </div>
+<div class="ts fluid basic link big menu" id="menu-color-id">
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                
-                    <li>
-                        <a href="/">
-                            
-                                Home
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="/archives">
-                            
-                                Archives
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="/tags">
-                            
-                                Tags
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="/categories">
-                            
-                                Categories
-                            
-                        </a>
-                    </li>
-                
-                    <li>
-                        <a href="https://github.com/klugjo/hexo-theme-clean-blog">
-                            
-                                <i class="fa fa-github fa-stack-2x"></i>
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/">Home</a>
+        
+            <a class="item" href="/archives">Archives</a>
+        
     </div>
-    <!-- /.container -->
-</nav>
+</div>
+<!-- the end of navigation -->
 
-    <!-- Main Content -->
-    <!-- Page Header -->
-<!-- Set your background image for this header in your post front-matter: cover -->
-
-<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-heading">
-                    <h1>Graph Study Notes 2</h1>
-                    
-                    <span class="meta">
-                        <!-- Date and Author -->
-                        
-                        
-                            2018-05-02
-                        
-                    </span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
-
-<!-- Post Content -->
-<article>
-    <div class="container">
-        <div class="row">
-
-            <!-- Tags and categories -->
-           
-
-            <!-- Gallery -->
-            
-
-            <!-- Post Main Content -->
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                
-
-                
-            </div>
-
-            <!-- Comments -->
-            
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    
-
-
-                </div>
-            
-        </div>
-    </div>
-</article>
-
-    <!-- Footer -->
-    <hr />
-
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                    
-
-                    
-
-                    
-                        <li>
-                            <a href="https://github.com/klugjo/hexo-theme-clean-blog" target="_blank">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                            </a>
-                        </li>
-                    
-
-                    
-
-                    
-
-                    
-                </ul>
-                <p class="copyright text-muted">&copy; 2018 John Doe<br></p>
-                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
-                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
-    <!-- After footer scripts -->
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #f7f7f7;">
+    <!-- ejs : align to post page or index page -->
     
-<!-- jQuery -->
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: #404040;" id="big-title">Hexo</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: #404040;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
 
-<!-- Bootstrap -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
-<!-- Gallery -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
 
-<!-- Disqus Comments -->
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">Graph Study Notes 2</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/4/2 
+                    
+                    </div>
+                </h1>
 
+                <ul>
+<li>Minimum Spanning Tree</li>
+<li>Shortest Paths</li>
+<li>Connectivity in a directed graph</li>
+</ul>
+<h2 id="Minimum-Spanning-Tree"><a href="#Minimum-Spanning-Tree" class="headerlink" title="Minimum Spanning Tree"></a>Minimum Spanning Tree</h2><p>Given a connected and undirected graph, a spanning tree of that graph is a subgraph that is a tree and connects all the vertices together. A single graph can have many different spanning trees. A minimum spanning tree (MST) for a weighted, connected and undirected graph is a spanning tree with weight less than or equal to the weight of every other spanning tree.  </p>
+<p><strong>Applications of Minimum Spanning Tree Problem</strong></p>
+<ul>
+<li>Network design</li>
+<li>Approximation algorithms for NP-hard problems</li>
+<li>Cluster analysis</li>
+</ul>
+<hr>
+<p><strong>Prim MST</strong><br>Prim’s algorithm is a Greedy algorithm.<br>Algorithm </p>
+<ol>
+<li>Create a set mstSet that keeps track of vertices already included in MST.</li>
+<li>Assign a key value to all vertices in the input graph. Initialize all key values as infinite.</li>
+<li>While mstSet doesn’t include all vertices<br>a) Pick a vertex <em>u</em> which is not there in mstSet and has minimum key value.<br>b) Include <em>u</em> to mstSet.<br>c) Update key value of all adjacent vertices of <em>u</em>. To update the key values, iterate through all adjecent vertices. For every adjacent vertex v, if weight of edge u-v is less than the previous key value of v, update the key value as weight of u-v</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line">// A C / C++ program for Prim&apos;s Minimum Spanning Tree (MST) algorithm. </span><br><span class="line">// The program is for adjacency matrix representation of the graph</span><br><span class="line"> </span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;limits.h&gt;</span><br><span class="line"> </span><br><span class="line">// Number of vertices in the graph</span><br><span class="line">#define V 5</span><br><span class="line"> </span><br><span class="line">// A utility function to find the vertex with minimum key value, from</span><br><span class="line">// the set of vertices not yet included in MST</span><br><span class="line">int minKey(int key[], bool mstSet[])</span><br><span class="line">&#123;</span><br><span class="line">   // Initialize min value</span><br><span class="line">   int min = INT_MAX, min_index;</span><br><span class="line"> </span><br><span class="line">   for (int v = 0; v &lt; V; v++)</span><br><span class="line">     if (mstSet[v] == false &amp;&amp; key[v] &lt; min)</span><br><span class="line">         min = key[v], min_index = v;</span><br><span class="line"> </span><br><span class="line">   return min_index;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// A utility function to print the constructed MST stored in parent[]</span><br><span class="line">int printMST(int parent[], int n, int graph[V][V])</span><br><span class="line">&#123;</span><br><span class="line">   printf(&quot;Edge   Weight\n&quot;);</span><br><span class="line">   for (int i = 1; i &lt; V; i++)</span><br><span class="line">      printf(&quot;%d - %d    %d \n&quot;, parent[i], i, graph[i][parent[i]]);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// Function to construct and print MST for a graph represented using adjacency</span><br><span class="line">// matrix representation</span><br><span class="line">void primMST(int graph[V][V])</span><br><span class="line">&#123;</span><br><span class="line">     int parent[V]; // Array to store constructed MST</span><br><span class="line">     int key[V];   // Key values used to pick minimum weight edge in cut</span><br><span class="line">     bool mstSet[V];  // To represent set of vertices not yet included in MST</span><br><span class="line"> </span><br><span class="line">     // Initialize all keys as INFINITE</span><br><span class="line">     for (int i = 0; i &lt; V; i++)</span><br><span class="line">        key[i] = INT_MAX, mstSet[i] = false;</span><br><span class="line"> </span><br><span class="line">     // Always include first 1st vertex in MST.</span><br><span class="line">     key[0] = 0;     // Make key 0 so that this vertex is picked as first vertex</span><br><span class="line">     parent[0] = -1; // First node is always root of MST </span><br><span class="line"> </span><br><span class="line">     // The MST will have V vertices</span><br><span class="line">     for (int count = 0; count &lt; V-1; count++)</span><br><span class="line">     &#123;</span><br><span class="line">        // Pick the minimum key vertex from the set of vertices</span><br><span class="line">        // not yet included in MST</span><br><span class="line">        int u = minKey(key, mstSet);</span><br><span class="line"> </span><br><span class="line">        // Add the picked vertex to the MST Set</span><br><span class="line">        mstSet[u] = true;</span><br><span class="line"> </span><br><span class="line">        // Update key value and parent index of the adjacent vertices of</span><br><span class="line">        // the picked vertex. Consider only those vertices which are not yet</span><br><span class="line">        // included in MST</span><br><span class="line">        for (int v = 0; v &lt; V; v++)</span><br><span class="line"> </span><br><span class="line">           // graph[u][v] is non zero only for adjacent vertices of m</span><br><span class="line">           // mstSet[v] is false for vertices not yet included in MST</span><br><span class="line">           // Update the key only if graph[u][v] is smaller than key[v]</span><br><span class="line">          if (graph[u][v] &amp;&amp; mstSet[v] == false &amp;&amp; graph[u][v] &lt;  key[v])</span><br><span class="line">             parent[v]  = u, key[v] = graph[u][v];</span><br><span class="line">     &#125;</span><br><span class="line"> </span><br><span class="line">     // print the constructed MST</span><br><span class="line">     printMST(parent, V, graph);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">// driver program to test above function</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">   /* Let us create the following graph</span><br><span class="line">          2    3</span><br><span class="line">      (0)--(1)--(2)</span><br><span class="line">       |   / \   |</span><br><span class="line">      6| 8/   \5 |7</span><br><span class="line">       | /     \ |</span><br><span class="line">      (3)-------(4)</span><br><span class="line">            9          */</span><br><span class="line">   int graph[V][V] = &#123;&#123;0, 2, 0, 6, 0&#125;,</span><br><span class="line">                      &#123;2, 0, 3, 8, 5&#125;,</span><br><span class="line">                      &#123;0, 3, 0, 0, 7&#125;,</span><br><span class="line">                      &#123;6, 8, 0, 0, 9&#125;,</span><br><span class="line">                      &#123;0, 5, 7, 9, 0&#125;,</span><br><span class="line">                     &#125;;</span><br><span class="line"> </span><br><span class="line">    // Print the solution</span><br><span class="line">    primMST(graph);</span><br><span class="line"> </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>Kruskal’s Minimum Spanning Tree Algorithm</strong></p>
+<p>steps for finding MST using Kruskal’s algorithm</p>
+<ol>
+<li>Sort all the edges in non-decreasing order of their weight.</li>
+<li>Pick the smallest edge. Check if it forms a cycle with the spanning tree formed so far. If cycle is not formed, include this edge. Else discard it.</li>
+<li>Repeat step #2 until there are (V-1) edges in the spanning tree.</li>
+</ol>
+<p><em>note</em>: step #2 uses Union-Find algorithm to detect cycle.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br></pre></td><td class="code"><pre><span class="line">// C++ program for Kruskal&apos;s algorithm to find Minimum Spanning Tree</span><br><span class="line">// of a given connected, undirected and weighted graph</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"> </span><br><span class="line">// a structure to represent a weighted edge in graph</span><br><span class="line">struct Edge</span><br><span class="line">&#123;</span><br><span class="line">    int src, dest, weight;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">// a structure to represent a connected, undirected</span><br><span class="line">// and weighted graph</span><br><span class="line">struct Graph</span><br><span class="line">&#123;</span><br><span class="line">    // V-&gt; Number of vertices, E-&gt; Number of edges</span><br><span class="line">    int V, E;</span><br><span class="line"> </span><br><span class="line">    // graph is represented as an array of edges. </span><br><span class="line">    // Since the graph is undirected, the edge</span><br><span class="line">    // from src to dest is also edge from dest</span><br><span class="line">    // to src. Both are counted as 1 edge here.</span><br><span class="line">    struct Edge* edge;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">// Creates a graph with V vertices and E edges</span><br><span class="line">struct Graph* createGraph(int V, int E)</span><br><span class="line">&#123;</span><br><span class="line">    struct Graph* graph = new Graph;</span><br><span class="line">    graph-&gt;V = V;</span><br><span class="line">    graph-&gt;E = E;</span><br><span class="line"> </span><br><span class="line">    graph-&gt;edge = new Edge[E];</span><br><span class="line"> </span><br><span class="line">    return graph;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// A structure to represent a subset for union-find</span><br><span class="line">struct subset</span><br><span class="line">&#123;</span><br><span class="line">    int parent;</span><br><span class="line">    int rank;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">// A utility function to find set of an element i</span><br><span class="line">// (uses path compression technique)</span><br><span class="line">int find(struct subset subsets[], int i)</span><br><span class="line">&#123;</span><br><span class="line">    // find root and make root as parent of i </span><br><span class="line">    // (path compression)</span><br><span class="line">    if (subsets[i].parent != i)</span><br><span class="line">        subsets[i].parent = find(subsets, subsets[i].parent);</span><br><span class="line"> </span><br><span class="line">    return subsets[i].parent;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// A function that does union of two sets of x and y</span><br><span class="line">// (uses union by rank)</span><br><span class="line">void Union(struct subset subsets[], int x, int y)</span><br><span class="line">&#123;</span><br><span class="line">    int xroot = find(subsets, x);</span><br><span class="line">    int yroot = find(subsets, y);</span><br><span class="line"> </span><br><span class="line">    // Attach smaller rank tree under root of high </span><br><span class="line">    // rank tree (Union by Rank)</span><br><span class="line">    if (subsets[xroot].rank &lt; subsets[yroot].rank)</span><br><span class="line">        subsets[xroot].parent = yroot;</span><br><span class="line">    else if (subsets[xroot].rank &gt; subsets[yroot].rank)</span><br><span class="line">        subsets[yroot].parent = xroot;</span><br><span class="line"> </span><br><span class="line">    // If ranks are same, then make one as root and </span><br><span class="line">    // increment its rank by one</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        subsets[yroot].parent = xroot;</span><br><span class="line">        subsets[xroot].rank++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// Compare two edges according to their weights.</span><br><span class="line">// Used in qsort() for sorting an array of edges</span><br><span class="line">int myComp(const void* a, const void* b)</span><br><span class="line">&#123;</span><br><span class="line">    struct Edge* a1 = (struct Edge*)a;</span><br><span class="line">    struct Edge* b1 = (struct Edge*)b;</span><br><span class="line">    return a1-&gt;weight &gt; b1-&gt;weight;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// The main function to construct MST using Kruskal&apos;s algorithm</span><br><span class="line">void KruskalMST(struct Graph* graph)</span><br><span class="line">&#123;</span><br><span class="line">    int V = graph-&gt;V;</span><br><span class="line">    struct Edge result[V];  // Tnis will store the resultant MST</span><br><span class="line">    int e = 0;  // An index variable, used for result[]</span><br><span class="line">    int i = 0;  // An index variable, used for sorted edges</span><br><span class="line"> </span><br><span class="line">    // Step 1:  Sort all the edges in non-decreasing </span><br><span class="line">    // order of their weight. If we are not allowed to </span><br><span class="line">    // change the given graph, we can create a copy of</span><br><span class="line">    // array of edges</span><br><span class="line">    qsort(graph-&gt;edge, graph-&gt;E, sizeof(graph-&gt;edge[0]), myComp);</span><br><span class="line"> </span><br><span class="line">    // Allocate memory for creating V ssubsets</span><br><span class="line">    struct subset *subsets =</span><br><span class="line">        (struct subset*) malloc( V * sizeof(struct subset) );</span><br><span class="line"> </span><br><span class="line">    // Create V subsets with single elements</span><br><span class="line">    for (int v = 0; v &lt; V; ++v)</span><br><span class="line">    &#123;</span><br><span class="line">        subsets[v].parent = v;</span><br><span class="line">        subsets[v].rank = 0;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    // Number of edges to be taken is equal to V-1</span><br><span class="line">    while (e &lt; V - 1)</span><br><span class="line">    &#123;</span><br><span class="line">        // Step 2: Pick the smallest edge. And increment </span><br><span class="line">        // the index for next iteration</span><br><span class="line">        struct Edge next_edge = graph-&gt;edge[i++];</span><br><span class="line"> </span><br><span class="line">        int x = find(subsets, next_edge.src);</span><br><span class="line">        int y = find(subsets, next_edge.dest);</span><br><span class="line"> </span><br><span class="line">        // If including this edge does&apos;t cause cycle,</span><br><span class="line">        // include it in result and increment the index </span><br><span class="line">        // of result for next edge</span><br><span class="line">        if (x != y)</span><br><span class="line">        &#123;</span><br><span class="line">            result[e++] = next_edge;</span><br><span class="line">            Union(subsets, x, y);</span><br><span class="line">        &#125;</span><br><span class="line">        // Else discard the next_edge</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    // print the contents of result[] to display the</span><br><span class="line">    // built MST</span><br><span class="line">    printf(&quot;Following are the edges in the constructed MST\n&quot;);</span><br><span class="line">    for (i = 0; i &lt; e; ++i)</span><br><span class="line">        printf(&quot;%d -- %d == %d\n&quot;, result[i].src, result[i].dest,</span><br><span class="line">                                                 result[i].weight);</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// Driver program to test above functions</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    /* Let us create following weighted graph</span><br><span class="line">             10</span><br><span class="line">        0--------1</span><br><span class="line">        |  \     |</span><br><span class="line">       6|   5\   |15</span><br><span class="line">        |      \ |</span><br><span class="line">        2--------3</span><br><span class="line">            4       */</span><br><span class="line">    int V = 4;  // Number of vertices in graph</span><br><span class="line">    int E = 5;  // Number of edges in graph</span><br><span class="line">    struct Graph* graph = createGraph(V, E);</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">    // add edge 0-1</span><br><span class="line">    graph-&gt;edge[0].src = 0;</span><br><span class="line">    graph-&gt;edge[0].dest = 1;</span><br><span class="line">    graph-&gt;edge[0].weight = 10;</span><br><span class="line"> </span><br><span class="line">    // add edge 0-2</span><br><span class="line">    graph-&gt;edge[1].src = 0;</span><br><span class="line">    graph-&gt;edge[1].dest = 2;</span><br><span class="line">    graph-&gt;edge[1].weight = 6;</span><br><span class="line"> </span><br><span class="line">    // add edge 0-3</span><br><span class="line">    graph-&gt;edge[2].src = 0;</span><br><span class="line">    graph-&gt;edge[2].dest = 3;</span><br><span class="line">    graph-&gt;edge[2].weight = 5;</span><br><span class="line"> </span><br><span class="line">    // add edge 1-3</span><br><span class="line">    graph-&gt;edge[3].src = 1;</span><br><span class="line">    graph-&gt;edge[3].dest = 3;</span><br><span class="line">    graph-&gt;edge[3].weight = 15;</span><br><span class="line"> </span><br><span class="line">    // add edge 2-3</span><br><span class="line">    graph-&gt;edge[4].src = 2;</span><br><span class="line">    graph-&gt;edge[4].dest = 3;</span><br><span class="line">    graph-&gt;edge[4].weight = 4;</span><br><span class="line"> </span><br><span class="line">    KruskalMST(graph);</span><br><span class="line"> </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h2 id="Shortest-Paths"><a href="#Shortest-Paths" class="headerlink" title="Shortest Paths"></a>Shortest Paths</h2><p><strong>Dijkstra Algorithm</strong><br>Algorithm</p>
+<ol>
+<li>Create a set sptSet (shortest path tree set) that keeps track of vertices included in shortest path tree. whose minimum distance from source is calculated and finalized. Initially, this set is empty.</li>
+<li>Assign a distance value to all vertices in the input graph. Initialize all distance value to Infinite. Assign distance value as 0 for the source vertex so that it is picked first.</li>
+<li>while sptSet doesn’t include all vertices<br>a) Pick a vertx u which is not there in sptSet and has minimum distance value.<br>b) include u to sptSet<br>c) Update distance value of all adjacent vertices of u. To update the distance value of u and weight of edge u-v, is less than the distance value of v, then update the distance value of v.</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">// A C++ program for Dijkstra&apos;s single source shortest path algorithm.</span><br><span class="line">// The program is for adjacency matrix representation of the graph</span><br><span class="line">  </span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;limits.h&gt;</span><br><span class="line">  </span><br><span class="line">// Number of vertices in the graph</span><br><span class="line">#define V 9</span><br><span class="line">  </span><br><span class="line">// A utility function to find the vertex with minimum distance value, from</span><br><span class="line">// the set of vertices not yet included in shortest path tree</span><br><span class="line">int minDistance(int dist[], bool sptSet[])</span><br><span class="line">&#123;</span><br><span class="line">   // Initialize min value</span><br><span class="line">   int min = INT_MAX, min_index;</span><br><span class="line">  </span><br><span class="line">   for (int v = 0; v &lt; V; v++)</span><br><span class="line">     if (sptSet[v] == false &amp;&amp; dist[v] &lt;= min)</span><br><span class="line">         min = dist[v], min_index = v;</span><br><span class="line">  </span><br><span class="line">   return min_index;</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">// A utility function to print the constructed distance array</span><br><span class="line">int printSolution(int dist[], int n)</span><br><span class="line">&#123;</span><br><span class="line">   printf(&quot;Vertex   Distance from Source\n&quot;);</span><br><span class="line">   for (int i = 0; i &lt; V; i++)</span><br><span class="line">      printf(&quot;%d tt %d\n&quot;, i, dist[i]);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">// Funtion that implements Dijkstra&apos;s single source shortest path algorithm</span><br><span class="line">// for a graph represented using adjacency matrix representation</span><br><span class="line">void dijkstra(int graph[V][V], int src)</span><br><span class="line">&#123;</span><br><span class="line">     int dist[V];     // The output array.  dist[i] will hold the shortest</span><br><span class="line">                      // distance from src to i</span><br><span class="line">  </span><br><span class="line">     bool sptSet[V]; // sptSet[i] will true if vertex i is included in shortest</span><br><span class="line">                     // path tree or shortest distance from src to i is finalized</span><br><span class="line">  </span><br><span class="line">     // Initialize all distances as INFINITE and stpSet[] as false</span><br><span class="line">     for (int i = 0; i &lt; V; i++)</span><br><span class="line">        dist[i] = INT_MAX, sptSet[i] = false;</span><br><span class="line">  </span><br><span class="line">     // Distance of source vertex from itself is always 0</span><br><span class="line">     dist[src] = 0;</span><br><span class="line">  </span><br><span class="line">     // Find shortest path for all vertices</span><br><span class="line">     for (int count = 0; count &lt; V-1; count++)</span><br><span class="line">     &#123;</span><br><span class="line">       // Pick the minimum distance vertex from the set of vertices not</span><br><span class="line">       // yet processed. u is always equal to src in first iteration.</span><br><span class="line">       int u = minDistance(dist, sptSet);</span><br><span class="line">  </span><br><span class="line">       // Mark the picked vertex as processed</span><br><span class="line">       sptSet[u] = true;</span><br><span class="line">  </span><br><span class="line">       // Update dist value of the adjacent vertices of the picked vertex.</span><br><span class="line">       for (int v = 0; v &lt; V; v++)</span><br><span class="line">  </span><br><span class="line">         // Update dist[v] only if is not in sptSet, there is an edge from </span><br><span class="line">         // u to v, and total weight of path from src to  v through u is </span><br><span class="line">         // smaller than current value of dist[v]</span><br><span class="line">         if (!sptSet[v] &amp;&amp; graph[u][v] &amp;&amp; dist[u] != INT_MAX </span><br><span class="line">                                       &amp;&amp; dist[u]+graph[u][v] &lt; dist[v])</span><br><span class="line">            dist[v] = dist[u] + graph[u][v];</span><br><span class="line">     &#125;</span><br><span class="line">  </span><br><span class="line">     // print the constructed distance array</span><br><span class="line">     printSolution(dist, V);</span><br><span class="line">&#125;</span><br><span class="line">  </span><br><span class="line">// driver program to test above function</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">   /* Let us create the example graph discussed above */</span><br><span class="line">   int graph[V][V] = &#123;&#123;0, 4, 0, 0, 0, 0, 0, 8, 0&#125;,</span><br><span class="line">                      &#123;4, 0, 8, 0, 0, 0, 0, 11, 0&#125;,</span><br><span class="line">                      &#123;0, 8, 0, 7, 0, 4, 0, 0, 2&#125;,</span><br><span class="line">                      &#123;0, 0, 7, 0, 9, 14, 0, 0, 0&#125;,</span><br><span class="line">                      &#123;0, 0, 0, 9, 0, 10, 0, 0, 0&#125;,</span><br><span class="line">                      &#123;0, 0, 4, 14, 10, 0, 2, 0, 0&#125;,</span><br><span class="line">                      &#123;0, 0, 0, 0, 0, 2, 0, 1, 6&#125;,</span><br><span class="line">                      &#123;8, 11, 0, 0, 0, 0, 1, 0, 7&#125;,</span><br><span class="line">                      &#123;0, 0, 2, 0, 0, 0, 6, 7, 0&#125;</span><br><span class="line">                     &#125;;</span><br><span class="line">  </span><br><span class="line">    dijkstra(graph, 0);</span><br><span class="line">  </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
 
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="#"></a>
+            
+            
+                <a href="/2018/05/02/Graph-Study-Notes-1/" class="styled-border">
+                    
+                    Graph Study Notes
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["Hallo, dit is mijn blog","嗨，這是我的博客!","안녕하세요, 제 블로그입니다.","Hi, This is my blog!","こんにちは、私のブログへようこそ!","مرحبا، مرحبا بك في مدونتي"];
+</script>
+<script src="/js/script.js"></script>
 </body>
-
 </html>
