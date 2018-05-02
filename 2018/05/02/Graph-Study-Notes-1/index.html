@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Graph Study Notes | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="DFS&amp;amp;BFS Graph Cycle Topological Sorting  DFS &amp;amp;BFSDFS // C++ program to print DFS traversal from // a given vertex in a  given graph #include&amp;lt;iostream&amp;gt; #include&amp;lt;list&amp;gt; using namespa">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Graph Study Notes">
+<meta property="og:url" content="http://yoursite.com/2018/05/02/Graph-Study-Notes-1/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="DFS&amp;amp;BFS Graph Cycle Topological Sorting  DFS &amp;amp;BFSDFS // C++ program to print DFS traversal from // a given vertex in a  given graph #include&amp;lt;iostream&amp;gt; #include&amp;lt;list&amp;gt; using namespa">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-02T11:41:23.051Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Graph Study Notes">
+<meta name="twitter:description" content="DFS&amp;amp;BFS Graph Cycle Topological Sorting  DFS &amp;amp;BFSDFS // C++ program to print DFS traversal from // a given vertex in a  given graph #include&amp;lt;iostream&amp;gt; #include&amp;lt;list&amp;gt; using namespa">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+  <link rel="stylesheet" href="/css/tocas.css">
+  <link rel="stylesheet" href="/css/animate.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <style type="text/css">
+    a.title-link:hover{
+        color: #34b2db !important;
+    }
+
+    a.title-link:active{
+        color: #2075c1 !important;
+    }
+
+    #menu-color-id{
+        background : #f7f7f7;
+    }
+
+    #menu-color-id a{
+        color: #5a5a5a;
+    }
+  </style>
+  <script src="/js/tocas.js"></script>
+  
+
+<link rel="stylesheet" href="/css/prism.css" type="text/css"></head>
+
+<body>
+<!-- navigation -->
+
+<div class="ts fluid basic link big menu" id="menu-color-id">
+
+    <!-- ejs : align to post page or index page -->
+        
+            <div class="ts very narrow container">
+        
+
+        
+            <a class="item" href="/">Home</a>
+        
+            <a class="item" href="/archives">Archives</a>
+        
+    </div>
+</div>
+<!-- the end of navigation -->
+
+<!-- big bang title -->
+<div class="ts padded horizontally fitted fluid slate" style="background-color: #f7f7f7;">
+    <!-- ejs : align to post page or index page -->
+    
+        <div class="ts very narrow container">
+    
+        <!-- Title -->
+        <h1 class="ts eleven wide column header be-center-h1">
+            <span style="color: #404040;" id="big-title">Hexo</span>
+            <div class="sub header" id="slogan-bar" style=" margin-top: 15px; color: #404040;"></div>
+        </h1>
+        <!-- the end of title -->
+    </div>
+</div>
+<!-- the end of big bang title -->
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+
+<!-- main section -->
+<div class="ts text container">
+        <!-- left section -->
+        <div class="column" style=" padding: 35px; ">
+            <!-- Articles -->
+                
+                <h1 class="ts header">
+                    <span style="color: #333;">Graph Study Notes</span>
+                    <div class="sub header" style="color: #808080;">Publish: 2018/4/2 
+                    
+                    </div>
+                </h1>
+
+                <ul>
+<li>DFS&amp;BFS</li>
+<li>Graph Cycle</li>
+<li>Topological Sorting</li>
+</ul>
+<h2 id="DFS-amp-BFS"><a href="#DFS-amp-BFS" class="headerlink" title="DFS &amp;BFS"></a>DFS &amp;BFS</h2><p><strong>DFS</strong></p>
+<pre><code>// C++ program to print DFS traversal from
+// a given vertex in a  given graph
+#include&lt;iostream&gt;
+#include&lt;list&gt;
+using namespace std;
+
+// Graph class represents a directed graph
+// using adjacency list representation
+class Graph
+{
+    int V;    // No. of vertices
+
+    // Pointer to an array containing
+    // adjacency lists
+    list&lt;int&gt; *adj;
+
+    // A recursive function used by DFS
+    void DFSUtil(int v, bool visited[]);
+public:
+    Graph(int V);   // Constructor
+
+    // function to add an edge to graph
+    void addEdge(int v, int w);
+
+    // DFS traversal of the vertices
+    // reachable from v
+    void DFS(int v);
+};
+
+Graph::Graph(int V)
+{
+    this-&gt;V = V;
+    adj = new list&lt;int&gt;[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+    adj[v].push_back(w); // Add w to v’s list.
+}
+
+void Graph::DFSUtil(int v, bool visited[])
+{
+    // Mark the current node as visited and
+    // print it
+    visited[v] = true;
+    cout &lt;&lt; v &lt;&lt; &quot; &quot;;
+
+    // Recur for all the vertices adjacent
+    // to this vertex
+    list&lt;int&gt;::iterator i;
+    for (i = adj[v].begin(); i != adj[v].end(); ++i)
+        if (!visited[*i])
+            DFSUtil(*i, visited);
+}
+
+// DFS traversal of the vertices reachable from v.
+// It uses recursive DFSUtil()
+void Graph::DFS(int v)
+{
+    // Mark all the vertices as not visited
+    bool *visited = new bool[V];
+    for (int i = 0; i &lt; V; i++)
+        visited[i] = false;
+
+    // Call the recursive helper function
+    // to print DFS traversal
+    DFSUtil(v, visited);
+}
+
+int main()
+{
+    // Create a graph given in the above diagram
+    Graph g(4);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.addEdge(3, 3);
+
+    cout &lt;&lt; &quot;Following is Depth First Traversal&quot;
+            &quot; (starting from vertex 2) \n&quot;;
+    g.DFS(2);
+
+    return 0;
+}
+
+</code></pre><hr>
+<p><strong>BFS</strong></p>
+<pre><code>// Program to print BFS traversal from a given
+// source vertex. BFS(int s) traverses vertices 
+// reachable from s.
+#include&lt;iostream&gt;
+#include &lt;list&gt;
+
+using namespace std;
+
+// This class represents a directed graph using
+// adjacency list representation
+class Graph
+{
+    int V;    // No. of vertices
+
+    // Pointer to an array containing adjacency
+    // lists
+    list&lt;int&gt; *adj;   
+public:
+    Graph(int V);  // Constructor
+
+    // function to add an edge to graph
+    void addEdge(int v, int w); 
+
+    // prints BFS traversal from a given source s
+    void BFS(int s);  
+};
+
+Graph::Graph(int V)
+{
+    this-&gt;V = V;
+    adj = new list&lt;int&gt;[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+    adj[v].push_back(w); // Add w to v’s list.
+}
+
+void Graph::BFS(int s)
+{
+    // Mark all the vertices as not visited
+    bool *visited = new bool[V];
+    for(int i = 0; i &lt; V; i++)
+        visited[i] = false;
+
+    // Create a queue for BFS
+    list&lt;int&gt; queue;
+
+    // Mark the current node as visited and enqueue it
+    visited[s] = true;
+    queue.push_back(s);
+
+    // &#39;i&#39; will be used to get all adjacent
+    // vertices of a vertex
+    list&lt;int&gt;::iterator i;
+
+    while(!queue.empty())
+    {
+        // Dequeue a vertex from queue and print it
+        s = queue.front();
+        cout &lt;&lt; s &lt;&lt; &quot; &quot;;
+        queue.pop_front();
+
+        // Get all adjacent vertices of the dequeued
+        // vertex s. If a adjacent has not been visited, 
+        // then mark it visited and enqueue it
+        for (i = adj[s].begin(); i != adj[s].end(); ++i)
+        {
+            if (!visited[*i])
+            {
+                visited[*i] = true;
+                queue.push_back(*i);
+            }
+        }
+    }
+}
+
+// Driver program to test methods of graph class
+int main()
+{
+    // Create a graph given in the above diagram
+    Graph g(4);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.addEdge(3, 3);
+
+    cout &lt;&lt; &quot;Following is Breadth First Traversal &quot;
+         &lt;&lt; &quot;(starting from vertex 2) \n&quot;;
+    g.BFS(2);
+
+    return 0;
+}
+
+</code></pre><hr>
+<h2 id="Graph-Cycle"><a href="#Graph-Cycle" class="headerlink" title="Graph Cycle"></a>Graph Cycle</h2><p><strong>Detect Cycle in a Directed Graph</strong></p>
+<pre><code>// A C++ Program to detect cycle in a graph
+#include&lt;iostream&gt;
+#include &lt;list&gt;
+#include &lt;limits.h&gt;
+
+using namespace std;
+
+class Graph
+{
+    int V;    // No. of vertices
+    list&lt;int&gt; *adj;    // Pointer to an array containing adjacency lists
+    bool isCyclicUtil(int v, bool visited[], bool *rs);  // used by isCyclic()
+public:
+    Graph(int V);   // Constructor
+    void addEdge(int v, int w);   // to add an edge to graph
+    bool isCyclic();    // returns true if there is a cycle in this graph
+};
+
+Graph::Graph(int V)
+{
+    this-&gt;V = V;
+    adj = new list&lt;int&gt;[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+    adj[v].push_back(w); // Add w to v’s list.
+}
+
+// This function is a variation of DFSUytil() in https://www.geeksforgeeks.org/archives/18212
+bool Graph::isCyclicUtil(int v, bool visited[], bool *recStack)
+{
+    if(visited[v] == false)
+    {
+        // Mark the current node as visited and part of recursion stack
+        visited[v] = true;
+        recStack[v] = true;
+
+        // Recur for all the vertices adjacent to this vertex
+        list&lt;int&gt;::iterator i;
+        for(i = adj[v].begin(); i != adj[v].end(); ++i)
+        {
+            if ( !visited[*i] &amp;&amp; isCyclicUtil(*i, visited, recStack) )
+                return true;
+            else if (recStack[*i])
+                return true;
+        }
+
+    }
+    recStack[v] = false;  // remove the vertex from recursion stack
+    return false;
+}
+
+// Returns true if the graph contains a cycle, else false.
+// This function is a variation of DFS() in https://www.geeksforgeeks.org/archives/18212
+bool Graph::isCyclic()
+{
+    // Mark all the vertices as not visited and not part of recursion
+    // stack
+    bool *visited = new bool[V];
+    bool *recStack = new bool[V];
+    for(int i = 0; i &lt; V; i++)
+    {
+        visited[i] = false;
+        recStack[i] = false;
+    }
+
+    // Call the recursive helper function to detect cycle in different
+    // DFS trees
+    for(int i = 0; i &lt; V; i++)
+        if (isCyclicUtil(i, visited, recStack))
+            return true;
+
+    return false;
+}
+
+int main()
+{
+    // Create a graph given in the above diagram
+    Graph g(4);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.addEdge(3, 3);
+
+    if(g.isCyclic())
+        cout &lt;&lt; &quot;Graph contains cycle&quot;;
+    else
+        cout &lt;&lt; &quot;Graph doesn&#39;t contain cycle&quot;;
+    return 0;
+}
+</code></pre><hr>
+<p><strong>Detect Cycle in an Undirected Graph (Union-Find Version)</strong><br>A disjoint data structure is a data structure that keeps track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets. A union-find algorithm is an algorithm that performs two useful operations on such a data structure：<br>Find: Determie which subset a particular elements is in. This can be used for determining if two elements are in the same subset.<br>Union: Join two subsets into a single subset.</p>
+<p>For each edge, make subset using both the vertices of the edge. If both the vertices are in the same subset, a cycle is found.</p>
+<pre><code>// A union-find algorithm to detect cycle in a graph
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+// a structure to represent an edge in graph
+struct Edge
+{
+    int src, dest;
+};
+
+// a structure to represent a graph
+struct Graph
+{
+    // V-&gt; Number of vertices, E-&gt; Number of edges
+    int V, E;
+
+    // graph is represented as an array of edges
+    struct Edge* edge;
+};
+
+// Creates a graph with V vertices and E edges
+struct Graph* createGraph(int V, int E)
+{
+    struct Graph* graph = 
+           (struct Graph*) malloc( sizeof(struct Graph) );
+    graph-&gt;V = V;
+    graph-&gt;E = E;
+
+    graph-&gt;edge = 
+        (struct Edge*) malloc( graph-&gt;E * sizeof( struct Edge ) );
+
+    return graph;
+}
+
+// A utility function to find the subset of an element i
+int find(int parent[], int i)
+{
+    if (parent[i] == -1)
+        return i;
+    return find(parent, parent[i]);
+}
+
+// A utility function to do union of two subsets 
+void Union(int parent[], int x, int y)
+{
+    int xset = find(parent, x);
+    int yset = find(parent, y);
+    parent[xset] = yset;
+}
+
+// The main function to check whether a given graph contains 
+// cycle or not
+int isCycle( struct Graph* graph )
+{
+    // Allocate memory for creating V subsets
+    int *parent = (int*) malloc( graph-&gt;V * sizeof(int) );
+
+    // Initialize all subsets as single element sets
+    memset(parent, -1, sizeof(int) * graph-&gt;V);
+
+    // Iterate through all edges of graph, find subset of both
+    // vertices of every edge, if both subsets are same, then 
+    // there is cycle in graph.
+    for(int i = 0; i &lt; graph-&gt;E; ++i)
+    {
+        int x = find(parent, graph-&gt;edge[i].src);
+        int y = find(parent, graph-&gt;edge[i].dest);
+
+        if (x == y)
+            return 1;
+
+        Union(parent, x, y);
+    }
+    return 0;
+}
+
+// Driver program to test above functions
+int main()
+{
+    /* Let us create following graph
+         0
+        |  \
+        |    \
+        1-----2 */    
+    int V = 3, E = 3;
+    struct Graph* graph = createGraph(V, E);
+
+    // add edge 0-1
+    graph-&gt;edge[0].src = 0;
+    graph-&gt;edge[0].dest = 1;
+
+    // add edge 1-2
+    graph-&gt;edge[1].src = 1;
+    graph-&gt;edge[1].dest = 2;
+
+    // add edge 0-2
+    graph-&gt;edge[2].src = 0;
+    graph-&gt;edge[2].dest = 2;
+
+    if (isCycle(graph))
+        printf( &quot;graph contains cycle&quot; );
+    else
+        printf( &quot;graph doesn&#39;t contain cycle&quot; );
+
+    return 0;
+}
+
+</code></pre><p>The time complexity of the union-find algorithm is O(ELogV)</p>
+<hr>
+<p><strong>Detect Cycle in an Undirected Graph (Union-Find Version)</strong><br>Like the directed graphs, we can use DFS to detect cycle in an undirected graph in O(V+E) time.</p>
+<pre><code>// A C++ Program to detect cycle in an undirected graph
+#include&lt;iostream&gt;
+#include &lt;list&gt;
+#include &lt;limits.h&gt;
+using namespace std;
+
+// Class for an undirected graph
+class Graph
+{
+    int V;    // No. of vertices
+    list&lt;int&gt; *adj;    // Pointer to an array containing adjacency lists
+    bool isCyclicUtil(int v, bool visited[], int parent);
+public:
+    Graph(int V);   // Constructor
+    void addEdge(int v, int w);   // to add an edge to graph
+    bool isCyclic();   // returns true if there is a cycle
+};
+
+Graph::Graph(int V)
+{
+    this-&gt;V = V;
+    adj = new list&lt;int&gt;[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+    adj[v].push_back(w); // Add w to v’s list.
+    adj[w].push_back(v); // Add v to w’s list.
+}
+
+// A recursive function that uses visited[] and parent to detect
+// cycle in subgraph reachable from vertex v.
+bool Graph::isCyclicUtil(int v, bool visited[], int parent)
+{
+    // Mark the current node as visited
+    visited[v] = true;
+
+    // Recur for all the vertices adjacent to this vertex
+    list&lt;int&gt;::iterator i;
+    for (i = adj[v].begin(); i != adj[v].end(); ++i)
+    {
+        // If an adjacent is not visited, then recur for that adjacent
+        if (!visited[*i])
+        {
+           if (isCyclicUtil(*i, visited, v))
+              return true;
+        }
+
+        // If an adjacent is visited and not parent of current vertex,
+        // then there is a cycle.
+        else if (*i != parent)
+           return true;
+    }
+    return false;
+}
+
+// Returns true if the graph contains a cycle, else false.
+bool Graph::isCyclic()
+{
+    // Mark all the vertices as not visited and not part of recursion
+    // stack
+    bool *visited = new bool[V];
+    for (int i = 0; i &lt; V; i++)
+        visited[i] = false;
+
+    // Call the recursive helper function to detect cycle in different
+    // DFS trees
+    for (int u = 0; u &lt; V; u++)
+        if (!visited[u]) // Don&#39;t recur for u if it is already visited
+          if (isCyclicUtil(u, visited, -1))
+             return true;
+
+    return false;
+}
+
+// Driver program to test above functions
+int main()
+{
+    Graph g1(5);
+    g1.addEdge(1, 0);
+    g1.addEdge(0, 2);
+    g1.addEdge(2, 0);
+    g1.addEdge(0, 3);
+    g1.addEdge(3, 4);
+    g1.isCyclic()? cout &lt;&lt; &quot;Graph contains cycle\n&quot;:
+                   cout &lt;&lt; &quot;Graph doesn&#39;t contain cycle\n&quot;;
+
+    Graph g2(3);
+    g2.addEdge(0, 1);
+    g2.addEdge(1, 2);
+    g2.isCyclic()? cout &lt;&lt; &quot;Graph contains cycle\n&quot;:
+                   cout &lt;&lt; &quot;Graph doesn&#39;t contain cycle\n&quot;;
+
+    return 0;
+}
+</code></pre><hr>
+<h2 id="Topological-Sorting"><a href="#Topological-Sorting" class="headerlink" title="Topological Sorting"></a>Topological Sorting</h2><p>Topological sorting for Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed edge uv, vertex u comes before v in the ordering. Topological Sorting for a graph is not possible if the graph is not a DAG.<br>In topological sorting, we use a temporary stack. We don’t print the vertex immediately, we first recursively call topological sorting for all its adjacent vertices, then push it to a stack. Finally, print contents of stack.</p>
+<pre><code>// A C++ program to print topological sorting of a DAG
+#include&lt;iostream&gt;
+#include &lt;list&gt;
+#include &lt;stack&gt;
+using namespace std;
+
+// Class to represent a graph
+class Graph
+{
+    int V;    // No. of vertices&#39;
+
+    // Pointer to an array containing adjacency listsList
+    list&lt;int&gt; *adj;
+
+    // A function used by topologicalSort
+    void topologicalSortUtil(int v, bool visited[], stack&lt;int&gt; &amp;Stack);
+public:
+    Graph(int V);   // Constructor
+
+     // function to add an edge to graph
+    void addEdge(int v, int w);
+
+    // prints a Topological Sort of the complete graph
+    void topologicalSort();
+};
+
+Graph::Graph(int V)
+{
+    this-&gt;V = V;
+    adj = new list&lt;int&gt;[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+    adj[v].push_back(w); // Add w to v’s list.
+}
+
+// A recursive function used by topologicalSort
+void Graph::topologicalSortUtil(int v, bool visited[], 
+                                stack&lt;int&gt; &amp;Stack)
+{
+    // Mark the current node as visited.
+    visited[v] = true;
+
+    // Recur for all the vertices adjacent to this vertex
+    list&lt;int&gt;::iterator i;
+    for (i = adj[v].begin(); i != adj[v].end(); ++i)
+        if (!visited[*i])
+            topologicalSortUtil(*i, visited, Stack);
+
+    // Push current vertex to stack which stores result
+    Stack.push(v);
+}
+
+// The function to do Topological Sort. It uses recursive 
+// topologicalSortUtil()
+void Graph::topologicalSort()
+{
+    stack&lt;int&gt; Stack;
+
+    // Mark all the vertices as not visited
+    bool *visited = new bool[V];
+    for (int i = 0; i &lt; V; i++)
+        visited[i] = false;
+
+    // Call the recursive helper function to store Topological
+    // Sort starting from all vertices one by one
+    for (int i = 0; i &lt; V; i++)
+      if (visited[i] == false)
+        topologicalSortUtil(i, visited, Stack);
+
+    // Print contents of stack
+    while (Stack.empty() == false)
+    {
+        cout &lt;&lt; Stack.top() &lt;&lt; &quot; &quot;;
+        Stack.pop();
+    }
+}
+
+// Driver program to test above functions
+int main()
+{
+    // Create a graph given in the above diagram
+    Graph g(6);
+    g.addEdge(5, 2);
+    g.addEdge(5, 0);
+    g.addEdge(4, 0);
+    g.addEdge(4, 1);
+    g.addEdge(2, 3);
+    g.addEdge(3, 1);
+
+    cout &lt;&lt; &quot;Following is a Topological Sort of the given graph n&quot;;
+    g.topologicalSort();
+
+    return 0;
+}
+
+</code></pre><hr>
+
+            <!-- / the end of articles -->
+        </div>
+        <!-- / left section -->
+        
+        
+            <hr/>
+            <div id="disqus_thread" style=" margin-top: 15px; margin-bottom: 25px; "></div>
+            <script>
+                /**
+                *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                /*
+                var disqus_config = function () {
+                this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                };
+                */
+                (function() { // DON'T EDIT BELOW THIS LINE
+                var d = document, s = d.createElement('script');
+                s.src = 'https://morgan-hexo-theme.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+                })();
+            </script>
+            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        
+
+        <!-- Next Post and Prev Post -->
+        
+        <hr/>
+        <div class="next-prev-post-section">
+            
+                <a href="/2018/05/02/Graph-Study-Notes-2/" class="styled-border">
+                    ←
+                    Graph Study Notes 2
+                    
+                </a>
+            
+            
+                <a href="/2018/05/01/Study-Dairy/" class="styled-border">
+                    
+                    Study Dairy
+                    →
+                </a>
+            
+        </div>
+        
+</div>
+<script type="text/javascript">
+    let img = document.getElementsByTagName("img");
+    for(let i = 0; i < img.length; i++){
+        img[i].className += " ts fluid image";
+    }
+</script>
+<!-- / main section -->
+
+<!-- copyright -->
+<div class="ts attached secondary segment">
+    <div class="ts narrow container">
+        <br>
+        <div class="ts large center aligned header">
+            Powered by Hexo, Theme designs by @hpcslag.
+            <div class="smaller sub header">
+                Style-Framework Tocas-UI designs by @yamioldmel 
+            </div>
+        </div>
+        <br>
+    </div>
+</div>
+<!-- / copyright -->
+<script type="text/javascript">
+    
+    const slogans = ["Hallo, dit is mijn blog","嗨，這是我的博客!","안녕하세요, 제 블로그입니다.","Hi, This is my blog!","こんにちは、私のブログへようこそ!","مرحبا، مرحبا بك في مدونتي"];
+</script>
+<script src="/js/script.js"></script>
+</body>
+</html>
