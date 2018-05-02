@@ -15,7 +15,11 @@ Graph Cycle
 Topological Sorting
 
 DFS &amp;amp;BFSDFS
-#include&amp;lt;iostream&amp;gt;#include&amp;lt;list&amp;gt;using namespace std;// Graph class represents">
+#include&amp;lt;iostream&amp;gt;
+#include&amp;lt;list&amp;gt;
+using namespace std;
+
+// Graph class repres">
     
 
     <!--Author-->
@@ -95,7 +99,7 @@ DFS &amp;amp;BFSDFS
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/">Wanying Ding</a>
+            <a class="navbar-brand" href="/">Algorithms</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -135,7 +139,7 @@ DFS &amp;amp;BFSDFS
                     </li>
                 
                     <li>
-                        <a href="https://github.com/Britjeans">
+                        <a href="https://github.com/klugjo/hexo-theme-clean-blog">
                             
                                 <i class="fa fa-github fa-stack-2x"></i>
                             
@@ -153,7 +157,7 @@ DFS &amp;amp;BFSDFS
     <!-- Page Header -->
 <!-- Set your background image for this header in your post front-matter: cover -->
 
-<header class="intro-header" style="background-image: url('home-bg.jpg')">
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
@@ -192,24 +196,593 @@ DFS &amp;amp;BFSDFS
 <li>Topological Sorting</li>
 </ul>
 <h2 id="DFS-amp-BFS"><a href="#DFS-amp-BFS" class="headerlink" title="DFS &amp;BFS"></a>DFS &amp;BFS</h2><p><strong>DFS</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;list&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">// Graph class represents a directed graph</span><br><span class="line">// using adjacency list representation</span><br><span class="line">class Graph</span><br><span class="line">&#123;</span><br><span class="line">    int V;    // No. of vertices</span><br><span class="line"></span><br><span class="line">    // Pointer to an array containing</span><br><span class="line">    // adjacency lists</span><br><span class="line">    list&lt;int&gt; *adj;</span><br><span class="line"></span><br><span class="line">    // A recursive function used by DFS</span><br><span class="line">    void DFSUtil(int v, bool visited[]);</span><br><span class="line">public:</span><br><span class="line">    Graph(int V);   // Constructor</span><br><span class="line"></span><br><span class="line">    // function to add an edge to graph</span><br><span class="line">    void addEdge(int v, int w);</span><br><span class="line"></span><br><span class="line">    // DFS traversal of the vertices</span><br><span class="line">    // reachable from v</span><br><span class="line">    void DFS(int v);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Graph::Graph(int V)</span><br><span class="line">&#123;</span><br><span class="line">    this-&gt;V = V;</span><br><span class="line">    adj = new list&lt;int&gt;[V];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Graph::addEdge(int v, int w)</span><br><span class="line">&#123;</span><br><span class="line">    adj[v].push_back(w); // Add w to v’s list.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Graph::DFSUtil(int v, bool visited[])</span><br><span class="line">&#123;</span><br><span class="line">    // Mark the current node as visited and</span><br><span class="line">    // print it</span><br><span class="line">    visited[v] = true;</span><br><span class="line">    cout &lt;&lt; v &lt;&lt; &quot; &quot;;</span><br><span class="line"></span><br><span class="line">    // Recur for all the vertices adjacent</span><br><span class="line">    // to this vertex</span><br><span class="line">    list&lt;int&gt;::iterator i;</span><br><span class="line">    for (i = adj[v].begin(); i != adj[v].end(); ++i)</span><br><span class="line">        if (!visited[*i])</span><br><span class="line">            DFSUtil(*i, visited);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// DFS traversal of the vertices reachable from v.</span><br><span class="line">// It uses recursive DFSUtil()</span><br><span class="line">void Graph::DFS(int v)</span><br><span class="line">&#123;</span><br><span class="line">    // Mark all the vertices as not visited</span><br><span class="line">    bool *visited = new bool[V];</span><br><span class="line">    for (int i = 0; i &lt; V; i++)</span><br><span class="line">        visited[i] = false;</span><br><span class="line"></span><br><span class="line">    // Call the recursive helper function</span><br><span class="line">    // to print DFS traversal</span><br><span class="line">    DFSUtil(v, visited);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    // Create a graph given in the above diagram</span><br><span class="line">    Graph g(4);</span><br><span class="line">    g.addEdge(0, 1);</span><br><span class="line">    g.addEdge(0, 2);</span><br><span class="line">    g.addEdge(1, 2);</span><br><span class="line">    g.addEdge(2, 0);</span><br><span class="line">    g.addEdge(2, 3);</span><br><span class="line">    g.addEdge(3, 3);</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; &quot;Following is Depth First Traversal&quot;</span><br><span class="line">            &quot; (starting from vertex 2) \n&quot;;</span><br><span class="line">    g.DFS(2);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>#include&lt;iostream&gt;
+#include&lt;list&gt;
+using namespace std;
+
+// Graph class represents a directed graph
+// using adjacency list representation
+class Graph
+{
+    int V;    // No. of vertices
+
+    // Pointer to an array containing
+    // adjacency lists
+    list&lt;int&gt; *adj;
+
+    // A recursive function used by DFS
+    void DFSUtil(int v, bool visited[]);
+public:
+    Graph(int V);   // Constructor
+
+    // function to add an edge to graph
+    void addEdge(int v, int w);
+
+    // DFS traversal of the vertices
+    // reachable from v
+    void DFS(int v);
+};
+
+Graph::Graph(int V)
+{
+    this-&gt;V = V;
+    adj = new list&lt;int&gt;[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+    adj[v].push_back(w); // Add w to v’s list.
+}
+
+void Graph::DFSUtil(int v, bool visited[])
+{
+    // Mark the current node as visited and
+    // print it
+    visited[v] = true;
+    cout &lt;&lt; v &lt;&lt; &quot; &quot;;
+
+    // Recur for all the vertices adjacent
+    // to this vertex
+    list&lt;int&gt;::iterator i;
+    for (i = adj[v].begin(); i != adj[v].end(); ++i)
+        if (!visited[*i])
+            DFSUtil(*i, visited);
+}
+
+// DFS traversal of the vertices reachable from v.
+// It uses recursive DFSUtil()
+void Graph::DFS(int v)
+{
+    // Mark all the vertices as not visited
+    bool *visited = new bool[V];
+    for (int i = 0; i &lt; V; i++)
+        visited[i] = false;
+
+    // Call the recursive helper function
+    // to print DFS traversal
+    DFSUtil(v, visited);
+}
+
+int main()
+{
+    // Create a graph given in the above diagram
+    Graph g(4);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.addEdge(3, 3);
+
+    cout &lt;&lt; &quot;Following is Depth First Traversal&quot;
+            &quot; (starting from vertex 2) \n&quot;;
+    g.DFS(2);
+
+    return 0;
+}
+
+</code></pre><hr>
 <p><strong>BFS</strong></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// Program to print BFS traversal from a given</span><br><span class="line">// source vertex. BFS(int s) traverses vertices </span><br><span class="line">// reachable from s.</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include &lt;list&gt;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">// This class represents a directed graph using</span><br><span class="line">// adjacency list representation</span><br><span class="line">class Graph</span><br><span class="line">&#123;</span><br><span class="line">    int V;    // No. of vertices</span><br><span class="line"></span><br><span class="line">    // Pointer to an array containing adjacency</span><br><span class="line">    // lists</span><br><span class="line">    list&lt;int&gt; *adj;   </span><br><span class="line">public:</span><br><span class="line">    Graph(int V);  // Constructor</span><br><span class="line"></span><br><span class="line">    // function to add an edge to graph</span><br><span class="line">    void addEdge(int v, int w); </span><br><span class="line"></span><br><span class="line">    // prints BFS traversal from a given source s</span><br><span class="line">    void BFS(int s);  </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Graph::Graph(int V)</span><br><span class="line">&#123;</span><br><span class="line">    this-&gt;V = V;</span><br><span class="line">    adj = new list&lt;int&gt;[V];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Graph::addEdge(int v, int w)</span><br><span class="line">&#123;</span><br><span class="line">    adj[v].push_back(w); // Add w to v’s list.</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void Graph::BFS(int s)</span><br><span class="line">&#123;</span><br><span class="line">    // Mark all the vertices as not visited</span><br><span class="line">    bool *visited = new bool[V];</span><br><span class="line">    for(int i = 0; i &lt; V; i++)</span><br><span class="line">        visited[i] = false;</span><br><span class="line"></span><br><span class="line">    // Create a queue for BFS</span><br><span class="line">    list&lt;int&gt; queue;</span><br><span class="line"></span><br><span class="line">    // Mark the current node as visited and enqueue it</span><br><span class="line">    visited[s] = true;</span><br><span class="line">    queue.push_back(s);</span><br><span class="line"></span><br><span class="line">    // &apos;i&apos; will be used to get all adjacent</span><br><span class="line">    // vertices of a vertex</span><br><span class="line">    list&lt;int&gt;::iterator i;</span><br><span class="line"></span><br><span class="line">    while(!queue.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        // Dequeue a vertex from queue and print it</span><br><span class="line">        s = queue.front();</span><br><span class="line">        cout &lt;&lt; s &lt;&lt; &quot; &quot;;</span><br><span class="line">        queue.pop_front();</span><br><span class="line"></span><br><span class="line">        // Get all adjacent vertices of the dequeued</span><br><span class="line">        // vertex s. If a adjacent has not been visited, </span><br><span class="line">        // then mark it visited and enqueue it</span><br><span class="line">        for (i = adj[s].begin(); i != adj[s].end(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            if (!visited[*i])</span><br><span class="line">            &#123;</span><br><span class="line">                visited[*i] = true;</span><br><span class="line">                queue.push_back(*i);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// Driver program to test methods of graph class</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    // Create a graph given in the above diagram</span><br><span class="line">    Graph g(4);</span><br><span class="line">    g.addEdge(0, 1);</span><br><span class="line">    g.addEdge(0, 2);</span><br><span class="line">    g.addEdge(1, 2);</span><br><span class="line">    g.addEdge(2, 0);</span><br><span class="line">    g.addEdge(2, 3);</span><br><span class="line">    g.addEdge(3, 3);</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; &quot;Following is Breadth First Traversal &quot;</span><br><span class="line">         &lt;&lt; &quot;(starting from vertex 2) \n&quot;;</span><br><span class="line">    g.BFS(2);</span><br><span class="line"></span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
-<h2 id="Graph-Cycle"><a href="#Graph-Cycle" class="headerlink" title="Graph Cycle"></a>Graph Cycle</h2><p><strong>Detect Cycle in a Directed Graph</strong><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// A C++ Program to detect cycle in a graph</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include &lt;list&gt;</span><br><span class="line">#include &lt;limits.h&gt;</span><br><span class="line"> </span><br><span class="line">using namespace std;</span><br><span class="line"> </span><br><span class="line">class Graph</span><br><span class="line">&#123;</span><br><span class="line">    int V;    // No. of vertices</span><br><span class="line">    list&lt;int&gt; *adj;    // Pointer to an array containing adjacency lists</span><br><span class="line">    bool isCyclicUtil(int v, bool visited[], bool *rs);  // used by isCyclic()</span><br><span class="line">public:</span><br><span class="line">    Graph(int V);   // Constructor</span><br><span class="line">    void addEdge(int v, int w);   // to add an edge to graph</span><br><span class="line">    bool isCyclic();    // returns true if there is a cycle in this graph</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">Graph::Graph(int V)</span><br><span class="line">&#123;</span><br><span class="line">    this-&gt;V = V;</span><br><span class="line">    adj = new list&lt;int&gt;[V];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">void Graph::addEdge(int v, int w)</span><br><span class="line">&#123;</span><br><span class="line">    adj[v].push_back(w); // Add w to v’s list.</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// This function is a variation of DFSUytil() in https://www.geeksforgeeks.org/archives/18212</span><br><span class="line">bool Graph::isCyclicUtil(int v, bool visited[], bool *recStack)</span><br><span class="line">&#123;</span><br><span class="line">    if(visited[v] == false)</span><br><span class="line">    &#123;</span><br><span class="line">        // Mark the current node as visited and part of recursion stack</span><br><span class="line">        visited[v] = true;</span><br><span class="line">        recStack[v] = true;</span><br><span class="line"> </span><br><span class="line">        // Recur for all the vertices adjacent to this vertex</span><br><span class="line">        list&lt;int&gt;::iterator i;</span><br><span class="line">        for(i = adj[v].begin(); i != adj[v].end(); ++i)</span><br><span class="line">        &#123;</span><br><span class="line">            if ( !visited[*i] &amp;&amp; isCyclicUtil(*i, visited, recStack) )</span><br><span class="line">                return true;</span><br><span class="line">            else if (recStack[*i])</span><br><span class="line">                return true;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">    &#125;</span><br><span class="line">    recStack[v] = false;  // remove the vertex from recursion stack</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// Returns true if the graph contains a cycle, else false.</span><br><span class="line">// This function is a variation of DFS() in https://www.geeksforgeeks.org/archives/18212</span><br><span class="line">bool Graph::isCyclic()</span><br><span class="line">&#123;</span><br><span class="line">    // Mark all the vertices as not visited and not part of recursion</span><br><span class="line">    // stack</span><br><span class="line">    bool *visited = new bool[V];</span><br><span class="line">    bool *recStack = new bool[V];</span><br><span class="line">    for(int i = 0; i &lt; V; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        visited[i] = false;</span><br><span class="line">        recStack[i] = false;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    // Call the recursive helper function to detect cycle in different</span><br><span class="line">    // DFS trees</span><br><span class="line">    for(int i = 0; i &lt; V; i++)</span><br><span class="line">        if (isCyclicUtil(i, visited, recStack))</span><br><span class="line">            return true;</span><br><span class="line"> </span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    // Create a graph given in the above diagram</span><br><span class="line">    Graph g(4);</span><br><span class="line">    g.addEdge(0, 1);</span><br><span class="line">    g.addEdge(0, 2);</span><br><span class="line">    g.addEdge(1, 2);</span><br><span class="line">    g.addEdge(2, 0);</span><br><span class="line">    g.addEdge(2, 3);</span><br><span class="line">    g.addEdge(3, 3);</span><br><span class="line"> </span><br><span class="line">    if(g.isCyclic())</span><br><span class="line">        cout &lt;&lt; &quot;Graph contains cycle&quot;;</span><br><span class="line">    else</span><br><span class="line">        cout &lt;&lt; &quot;Graph doesn&apos;t contain cycle&quot;;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<hr>
+<pre><code>// Program to print BFS traversal from a given
+// source vertex. BFS(int s) traverses vertices 
+// reachable from s.
+#include&lt;iostream&gt;
+#include &lt;list&gt;
+
+using namespace std;
+
+// This class represents a directed graph using
+// adjacency list representation
+class Graph
+{
+    int V;    // No. of vertices
+
+    // Pointer to an array containing adjacency
+    // lists
+    list&lt;int&gt; *adj;   
+public:
+    Graph(int V);  // Constructor
+
+    // function to add an edge to graph
+    void addEdge(int v, int w); 
+
+    // prints BFS traversal from a given source s
+    void BFS(int s);  
+};
+
+Graph::Graph(int V)
+{
+    this-&gt;V = V;
+    adj = new list&lt;int&gt;[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+    adj[v].push_back(w); // Add w to v’s list.
+}
+
+void Graph::BFS(int s)
+{
+    // Mark all the vertices as not visited
+    bool *visited = new bool[V];
+    for(int i = 0; i &lt; V; i++)
+        visited[i] = false;
+
+    // Create a queue for BFS
+    list&lt;int&gt; queue;
+
+    // Mark the current node as visited and enqueue it
+    visited[s] = true;
+    queue.push_back(s);
+
+    // &#39;i&#39; will be used to get all adjacent
+    // vertices of a vertex
+    list&lt;int&gt;::iterator i;
+
+    while(!queue.empty())
+    {
+        // Dequeue a vertex from queue and print it
+        s = queue.front();
+        cout &lt;&lt; s &lt;&lt; &quot; &quot;;
+        queue.pop_front();
+
+        // Get all adjacent vertices of the dequeued
+        // vertex s. If a adjacent has not been visited, 
+        // then mark it visited and enqueue it
+        for (i = adj[s].begin(); i != adj[s].end(); ++i)
+        {
+            if (!visited[*i])
+            {
+                visited[*i] = true;
+                queue.push_back(*i);
+            }
+        }
+    }
+}
+
+// Driver program to test methods of graph class
+int main()
+{
+    // Create a graph given in the above diagram
+    Graph g(4);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.addEdge(3, 3);
+
+    cout &lt;&lt; &quot;Following is Breadth First Traversal &quot;
+         &lt;&lt; &quot;(starting from vertex 2) \n&quot;;
+    g.BFS(2);
+
+    return 0;
+}
+
+</code></pre><hr>
+<h2 id="Graph-Cycle"><a href="#Graph-Cycle" class="headerlink" title="Graph Cycle"></a>Graph Cycle</h2><p><strong>Detect Cycle in a Directed Graph</strong></p>
+<pre><code>// A C++ Program to detect cycle in a graph
+#include&lt;iostream&gt;
+#include &lt;list&gt;
+#include &lt;limits.h&gt;
+
+using namespace std;
+
+class Graph
+{
+    int V;    // No. of vertices
+    list&lt;int&gt; *adj;    // Pointer to an array containing adjacency lists
+    bool isCyclicUtil(int v, bool visited[], bool *rs);  // used by isCyclic()
+public:
+    Graph(int V);   // Constructor
+    void addEdge(int v, int w);   // to add an edge to graph
+    bool isCyclic();    // returns true if there is a cycle in this graph
+};
+
+Graph::Graph(int V)
+{
+    this-&gt;V = V;
+    adj = new list&lt;int&gt;[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+    adj[v].push_back(w); // Add w to v’s list.
+}
+
+// This function is a variation of DFSUytil() in https://www.geeksforgeeks.org/archives/18212
+bool Graph::isCyclicUtil(int v, bool visited[], bool *recStack)
+{
+    if(visited[v] == false)
+    {
+        // Mark the current node as visited and part of recursion stack
+        visited[v] = true;
+        recStack[v] = true;
+
+        // Recur for all the vertices adjacent to this vertex
+        list&lt;int&gt;::iterator i;
+        for(i = adj[v].begin(); i != adj[v].end(); ++i)
+        {
+            if ( !visited[*i] &amp;&amp; isCyclicUtil(*i, visited, recStack) )
+                return true;
+            else if (recStack[*i])
+                return true;
+        }
+
+    }
+    recStack[v] = false;  // remove the vertex from recursion stack
+    return false;
+}
+
+// Returns true if the graph contains a cycle, else false.
+// This function is a variation of DFS() in https://www.geeksforgeeks.org/archives/18212
+bool Graph::isCyclic()
+{
+    // Mark all the vertices as not visited and not part of recursion
+    // stack
+    bool *visited = new bool[V];
+    bool *recStack = new bool[V];
+    for(int i = 0; i &lt; V; i++)
+    {
+        visited[i] = false;
+        recStack[i] = false;
+    }
+
+    // Call the recursive helper function to detect cycle in different
+    // DFS trees
+    for(int i = 0; i &lt; V; i++)
+        if (isCyclicUtil(i, visited, recStack))
+            return true;
+
+    return false;
+}
+
+int main()
+{
+    // Create a graph given in the above diagram
+    Graph g(4);
+    g.addEdge(0, 1);
+    g.addEdge(0, 2);
+    g.addEdge(1, 2);
+    g.addEdge(2, 0);
+    g.addEdge(2, 3);
+    g.addEdge(3, 3);
+
+    if(g.isCyclic())
+        cout &lt;&lt; &quot;Graph contains cycle&quot;;
+    else
+        cout &lt;&lt; &quot;Graph doesn&#39;t contain cycle&quot;;
+    return 0;
+}
+</code></pre><hr>
 <p><strong>Detect Cycle in an Undirected Graph (Union-Find Version)</strong><br>A disjoint data structure is a data structure that keeps track of a set of elements partitioned into a number of disjoint (non-overlapping) subsets. A union-find algorithm is an algorithm that performs two useful operations on such a data structure：<br>Find: Determie which subset a particular elements is in. This can be used for determining if two elements are in the same subset.<br>Union: Join two subsets into a single subset.</p>
 <p>For each edge, make subset using both the vertices of the edge. If both the vertices are in the same subset, a cycle is found.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// A union-find algorithm to detect cycle in a graph</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;stdlib.h&gt;</span><br><span class="line">#include &lt;string.h&gt;</span><br><span class="line"> </span><br><span class="line">// a structure to represent an edge in graph</span><br><span class="line">struct Edge</span><br><span class="line">&#123;</span><br><span class="line">    int src, dest;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">// a structure to represent a graph</span><br><span class="line">struct Graph</span><br><span class="line">&#123;</span><br><span class="line">    // V-&gt; Number of vertices, E-&gt; Number of edges</span><br><span class="line">    int V, E;</span><br><span class="line"> </span><br><span class="line">    // graph is represented as an array of edges</span><br><span class="line">    struct Edge* edge;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">// Creates a graph with V vertices and E edges</span><br><span class="line">struct Graph* createGraph(int V, int E)</span><br><span class="line">&#123;</span><br><span class="line">    struct Graph* graph = </span><br><span class="line">           (struct Graph*) malloc( sizeof(struct Graph) );</span><br><span class="line">    graph-&gt;V = V;</span><br><span class="line">    graph-&gt;E = E;</span><br><span class="line"> </span><br><span class="line">    graph-&gt;edge = </span><br><span class="line">        (struct Edge*) malloc( graph-&gt;E * sizeof( struct Edge ) );</span><br><span class="line"> </span><br><span class="line">    return graph;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// A utility function to find the subset of an element i</span><br><span class="line">int find(int parent[], int i)</span><br><span class="line">&#123;</span><br><span class="line">    if (parent[i] == -1)</span><br><span class="line">        return i;</span><br><span class="line">    return find(parent, parent[i]);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// A utility function to do union of two subsets </span><br><span class="line">void Union(int parent[], int x, int y)</span><br><span class="line">&#123;</span><br><span class="line">    int xset = find(parent, x);</span><br><span class="line">    int yset = find(parent, y);</span><br><span class="line">    parent[xset] = yset;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// The main function to check whether a given graph contains </span><br><span class="line">// cycle or not</span><br><span class="line">int isCycle( struct Graph* graph )</span><br><span class="line">&#123;</span><br><span class="line">    // Allocate memory for creating V subsets</span><br><span class="line">    int *parent = (int*) malloc( graph-&gt;V * sizeof(int) );</span><br><span class="line"> </span><br><span class="line">    // Initialize all subsets as single element sets</span><br><span class="line">    memset(parent, -1, sizeof(int) * graph-&gt;V);</span><br><span class="line"> </span><br><span class="line">    // Iterate through all edges of graph, find subset of both</span><br><span class="line">    // vertices of every edge, if both subsets are same, then </span><br><span class="line">    // there is cycle in graph.</span><br><span class="line">    for(int i = 0; i &lt; graph-&gt;E; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        int x = find(parent, graph-&gt;edge[i].src);</span><br><span class="line">        int y = find(parent, graph-&gt;edge[i].dest);</span><br><span class="line"> </span><br><span class="line">        if (x == y)</span><br><span class="line">            return 1;</span><br><span class="line"> </span><br><span class="line">        Union(parent, x, y);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// Driver program to test above functions</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    /* Let us create following graph</span><br><span class="line">         0</span><br><span class="line">        |  \</span><br><span class="line">        |    \</span><br><span class="line">        1-----2 */    </span><br><span class="line">    int V = 3, E = 3;</span><br><span class="line">    struct Graph* graph = createGraph(V, E);</span><br><span class="line"> </span><br><span class="line">    // add edge 0-1</span><br><span class="line">    graph-&gt;edge[0].src = 0;</span><br><span class="line">    graph-&gt;edge[0].dest = 1;</span><br><span class="line"> </span><br><span class="line">    // add edge 1-2</span><br><span class="line">    graph-&gt;edge[1].src = 1;</span><br><span class="line">    graph-&gt;edge[1].dest = 2;</span><br><span class="line"> </span><br><span class="line">    // add edge 0-2</span><br><span class="line">    graph-&gt;edge[2].src = 0;</span><br><span class="line">    graph-&gt;edge[2].dest = 2;</span><br><span class="line"> </span><br><span class="line">    if (isCycle(graph))</span><br><span class="line">        printf( &quot;graph contains cycle&quot; );</span><br><span class="line">    else</span><br><span class="line">        printf( &quot;graph doesn&apos;t contain cycle&quot; );</span><br><span class="line"> </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>The time complexity of the union-find algorithm is O(ELogV)</p>
+<pre><code>// A union-find algorithm to detect cycle in a graph
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+// a structure to represent an edge in graph
+struct Edge
+{
+    int src, dest;
+};
+
+// a structure to represent a graph
+struct Graph
+{
+    // V-&gt; Number of vertices, E-&gt; Number of edges
+    int V, E;
+
+    // graph is represented as an array of edges
+    struct Edge* edge;
+};
+
+// Creates a graph with V vertices and E edges
+struct Graph* createGraph(int V, int E)
+{
+    struct Graph* graph = 
+           (struct Graph*) malloc( sizeof(struct Graph) );
+    graph-&gt;V = V;
+    graph-&gt;E = E;
+
+    graph-&gt;edge = 
+        (struct Edge*) malloc( graph-&gt;E * sizeof( struct Edge ) );
+
+    return graph;
+}
+
+// A utility function to find the subset of an element i
+int find(int parent[], int i)
+{
+    if (parent[i] == -1)
+        return i;
+    return find(parent, parent[i]);
+}
+
+// A utility function to do union of two subsets 
+void Union(int parent[], int x, int y)
+{
+    int xset = find(parent, x);
+    int yset = find(parent, y);
+    parent[xset] = yset;
+}
+
+// The main function to check whether a given graph contains 
+// cycle or not
+int isCycle( struct Graph* graph )
+{
+    // Allocate memory for creating V subsets
+    int *parent = (int*) malloc( graph-&gt;V * sizeof(int) );
+
+    // Initialize all subsets as single element sets
+    memset(parent, -1, sizeof(int) * graph-&gt;V);
+
+    // Iterate through all edges of graph, find subset of both
+    // vertices of every edge, if both subsets are same, then 
+    // there is cycle in graph.
+    for(int i = 0; i &lt; graph-&gt;E; ++i)
+    {
+        int x = find(parent, graph-&gt;edge[i].src);
+        int y = find(parent, graph-&gt;edge[i].dest);
+
+        if (x == y)
+            return 1;
+
+        Union(parent, x, y);
+    }
+    return 0;
+}
+
+// Driver program to test above functions
+int main()
+{
+    /* Let us create following graph
+         0
+        |  \
+        |    \
+        1-----2 */    
+    int V = 3, E = 3;
+    struct Graph* graph = createGraph(V, E);
+
+    // add edge 0-1
+    graph-&gt;edge[0].src = 0;
+    graph-&gt;edge[0].dest = 1;
+
+    // add edge 1-2
+    graph-&gt;edge[1].src = 1;
+    graph-&gt;edge[1].dest = 2;
+
+    // add edge 0-2
+    graph-&gt;edge[2].src = 0;
+    graph-&gt;edge[2].dest = 2;
+
+    if (isCycle(graph))
+        printf( &quot;graph contains cycle&quot; );
+    else
+        printf( &quot;graph doesn&#39;t contain cycle&quot; );
+
+    return 0;
+}
+
+</code></pre><p>The time complexity of the union-find algorithm is O(ELogV)</p>
 <hr>
 <p><strong>Detect Cycle in an Undirected Graph (Union-Find Version)</strong><br>Like the directed graphs, we can use DFS to detect cycle in an undirected graph in O(V+E) time.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// A C++ Program to detect cycle in an undirected graph</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include &lt;list&gt;</span><br><span class="line">#include &lt;limits.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"> </span><br><span class="line">// Class for an undirected graph</span><br><span class="line">class Graph</span><br><span class="line">&#123;</span><br><span class="line">    int V;    // No. of vertices</span><br><span class="line">    list&lt;int&gt; *adj;    // Pointer to an array containing adjacency lists</span><br><span class="line">    bool isCyclicUtil(int v, bool visited[], int parent);</span><br><span class="line">public:</span><br><span class="line">    Graph(int V);   // Constructor</span><br><span class="line">    void addEdge(int v, int w);   // to add an edge to graph</span><br><span class="line">    bool isCyclic();   // returns true if there is a cycle</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">Graph::Graph(int V)</span><br><span class="line">&#123;</span><br><span class="line">    this-&gt;V = V;</span><br><span class="line">    adj = new list&lt;int&gt;[V];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">void Graph::addEdge(int v, int w)</span><br><span class="line">&#123;</span><br><span class="line">    adj[v].push_back(w); // Add w to v’s list.</span><br><span class="line">    adj[w].push_back(v); // Add v to w’s list.</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// A recursive function that uses visited[] and parent to detect</span><br><span class="line">// cycle in subgraph reachable from vertex v.</span><br><span class="line">bool Graph::isCyclicUtil(int v, bool visited[], int parent)</span><br><span class="line">&#123;</span><br><span class="line">    // Mark the current node as visited</span><br><span class="line">    visited[v] = true;</span><br><span class="line"> </span><br><span class="line">    // Recur for all the vertices adjacent to this vertex</span><br><span class="line">    list&lt;int&gt;::iterator i;</span><br><span class="line">    for (i = adj[v].begin(); i != adj[v].end(); ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        // If an adjacent is not visited, then recur for that adjacent</span><br><span class="line">        if (!visited[*i])</span><br><span class="line">        &#123;</span><br><span class="line">           if (isCyclicUtil(*i, visited, v))</span><br><span class="line">              return true;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        // If an adjacent is visited and not parent of current vertex,</span><br><span class="line">        // then there is a cycle.</span><br><span class="line">        else if (*i != parent)</span><br><span class="line">           return true;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// Returns true if the graph contains a cycle, else false.</span><br><span class="line">bool Graph::isCyclic()</span><br><span class="line">&#123;</span><br><span class="line">    // Mark all the vertices as not visited and not part of recursion</span><br><span class="line">    // stack</span><br><span class="line">    bool *visited = new bool[V];</span><br><span class="line">    for (int i = 0; i &lt; V; i++)</span><br><span class="line">        visited[i] = false;</span><br><span class="line"> </span><br><span class="line">    // Call the recursive helper function to detect cycle in different</span><br><span class="line">    // DFS trees</span><br><span class="line">    for (int u = 0; u &lt; V; u++)</span><br><span class="line">        if (!visited[u]) // Don&apos;t recur for u if it is already visited</span><br><span class="line">          if (isCyclicUtil(u, visited, -1))</span><br><span class="line">             return true;</span><br><span class="line"> </span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// Driver program to test above functions</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    Graph g1(5);</span><br><span class="line">    g1.addEdge(1, 0);</span><br><span class="line">    g1.addEdge(0, 2);</span><br><span class="line">    g1.addEdge(2, 0);</span><br><span class="line">    g1.addEdge(0, 3);</span><br><span class="line">    g1.addEdge(3, 4);</span><br><span class="line">    g1.isCyclic()? cout &lt;&lt; &quot;Graph contains cycle\n&quot;:</span><br><span class="line">                   cout &lt;&lt; &quot;Graph doesn&apos;t contain cycle\n&quot;;</span><br><span class="line"> </span><br><span class="line">    Graph g2(3);</span><br><span class="line">    g2.addEdge(0, 1);</span><br><span class="line">    g2.addEdge(1, 2);</span><br><span class="line">    g2.isCyclic()? cout &lt;&lt; &quot;Graph contains cycle\n&quot;:</span><br><span class="line">                   cout &lt;&lt; &quot;Graph doesn&apos;t contain cycle\n&quot;;</span><br><span class="line"> </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>// A C++ Program to detect cycle in an undirected graph
+#include&lt;iostream&gt;
+#include &lt;list&gt;
+#include &lt;limits.h&gt;
+using namespace std;
+
+// Class for an undirected graph
+class Graph
+{
+    int V;    // No. of vertices
+    list&lt;int&gt; *adj;    // Pointer to an array containing adjacency lists
+    bool isCyclicUtil(int v, bool visited[], int parent);
+public:
+    Graph(int V);   // Constructor
+    void addEdge(int v, int w);   // to add an edge to graph
+    bool isCyclic();   // returns true if there is a cycle
+};
+
+Graph::Graph(int V)
+{
+    this-&gt;V = V;
+    adj = new list&lt;int&gt;[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+    adj[v].push_back(w); // Add w to v’s list.
+    adj[w].push_back(v); // Add v to w’s list.
+}
+
+// A recursive function that uses visited[] and parent to detect
+// cycle in subgraph reachable from vertex v.
+bool Graph::isCyclicUtil(int v, bool visited[], int parent)
+{
+    // Mark the current node as visited
+    visited[v] = true;
+
+    // Recur for all the vertices adjacent to this vertex
+    list&lt;int&gt;::iterator i;
+    for (i = adj[v].begin(); i != adj[v].end(); ++i)
+    {
+        // If an adjacent is not visited, then recur for that adjacent
+        if (!visited[*i])
+        {
+           if (isCyclicUtil(*i, visited, v))
+              return true;
+        }
+
+        // If an adjacent is visited and not parent of current vertex,
+        // then there is a cycle.
+        else if (*i != parent)
+           return true;
+    }
+    return false;
+}
+
+// Returns true if the graph contains a cycle, else false.
+bool Graph::isCyclic()
+{
+    // Mark all the vertices as not visited and not part of recursion
+    // stack
+    bool *visited = new bool[V];
+    for (int i = 0; i &lt; V; i++)
+        visited[i] = false;
+
+    // Call the recursive helper function to detect cycle in different
+    // DFS trees
+    for (int u = 0; u &lt; V; u++)
+        if (!visited[u]) // Don&#39;t recur for u if it is already visited
+          if (isCyclicUtil(u, visited, -1))
+             return true;
+
+    return false;
+}
+
+// Driver program to test above functions
+int main()
+{
+    Graph g1(5);
+    g1.addEdge(1, 0);
+    g1.addEdge(0, 2);
+    g1.addEdge(2, 0);
+    g1.addEdge(0, 3);
+    g1.addEdge(3, 4);
+    g1.isCyclic()? cout &lt;&lt; &quot;Graph contains cycle\n&quot;:
+                   cout &lt;&lt; &quot;Graph doesn&#39;t contain cycle\n&quot;;
+
+    Graph g2(3);
+    g2.addEdge(0, 1);
+    g2.addEdge(1, 2);
+    g2.isCyclic()? cout &lt;&lt; &quot;Graph contains cycle\n&quot;:
+                   cout &lt;&lt; &quot;Graph doesn&#39;t contain cycle\n&quot;;
+
+    return 0;
+}
+</code></pre><hr>
 <h2 id="Topological-Sorting"><a href="#Topological-Sorting" class="headerlink" title="Topological Sorting"></a>Topological Sorting</h2><p>Topological sorting for Directed Acyclic Graph (DAG) is a linear ordering of vertices such that for every directed edge uv, vertex u comes before v in the ordering. Topological Sorting for a graph is not possible if the graph is not a DAG.<br>In topological sorting, we use a temporary stack. We don’t print the vertex immediately, we first recursively call topological sorting for all its adjacent vertices, then push it to a stack. Finally, print contents of stack.</p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">// A C++ program to print topological sorting of a DAG</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include &lt;list&gt;</span><br><span class="line">#include &lt;stack&gt;</span><br><span class="line">using namespace std;</span><br><span class="line"> </span><br><span class="line">// Class to represent a graph</span><br><span class="line">class Graph</span><br><span class="line">&#123;</span><br><span class="line">    int V;    // No. of vertices&apos;</span><br><span class="line"> </span><br><span class="line">    // Pointer to an array containing adjacency listsList</span><br><span class="line">    list&lt;int&gt; *adj;</span><br><span class="line"> </span><br><span class="line">    // A function used by topologicalSort</span><br><span class="line">    void topologicalSortUtil(int v, bool visited[], stack&lt;int&gt; &amp;Stack);</span><br><span class="line">public:</span><br><span class="line">    Graph(int V);   // Constructor</span><br><span class="line"> </span><br><span class="line">     // function to add an edge to graph</span><br><span class="line">    void addEdge(int v, int w);</span><br><span class="line"> </span><br><span class="line">    // prints a Topological Sort of the complete graph</span><br><span class="line">    void topologicalSort();</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">Graph::Graph(int V)</span><br><span class="line">&#123;</span><br><span class="line">    this-&gt;V = V;</span><br><span class="line">    adj = new list&lt;int&gt;[V];</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">void Graph::addEdge(int v, int w)</span><br><span class="line">&#123;</span><br><span class="line">    adj[v].push_back(w); // Add w to v’s list.</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// A recursive function used by topologicalSort</span><br><span class="line">void Graph::topologicalSortUtil(int v, bool visited[], </span><br><span class="line">                                stack&lt;int&gt; &amp;Stack)</span><br><span class="line">&#123;</span><br><span class="line">    // Mark the current node as visited.</span><br><span class="line">    visited[v] = true;</span><br><span class="line"> </span><br><span class="line">    // Recur for all the vertices adjacent to this vertex</span><br><span class="line">    list&lt;int&gt;::iterator i;</span><br><span class="line">    for (i = adj[v].begin(); i != adj[v].end(); ++i)</span><br><span class="line">        if (!visited[*i])</span><br><span class="line">            topologicalSortUtil(*i, visited, Stack);</span><br><span class="line"> </span><br><span class="line">    // Push current vertex to stack which stores result</span><br><span class="line">    Stack.push(v);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// The function to do Topological Sort. It uses recursive </span><br><span class="line">// topologicalSortUtil()</span><br><span class="line">void Graph::topologicalSort()</span><br><span class="line">&#123;</span><br><span class="line">    stack&lt;int&gt; Stack;</span><br><span class="line"> </span><br><span class="line">    // Mark all the vertices as not visited</span><br><span class="line">    bool *visited = new bool[V];</span><br><span class="line">    for (int i = 0; i &lt; V; i++)</span><br><span class="line">        visited[i] = false;</span><br><span class="line"> </span><br><span class="line">    // Call the recursive helper function to store Topological</span><br><span class="line">    // Sort starting from all vertices one by one</span><br><span class="line">    for (int i = 0; i &lt; V; i++)</span><br><span class="line">      if (visited[i] == false)</span><br><span class="line">        topologicalSortUtil(i, visited, Stack);</span><br><span class="line"> </span><br><span class="line">    // Print contents of stack</span><br><span class="line">    while (Stack.empty() == false)</span><br><span class="line">    &#123;</span><br><span class="line">        cout &lt;&lt; Stack.top() &lt;&lt; &quot; &quot;;</span><br><span class="line">        Stack.pop();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">// Driver program to test above functions</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    // Create a graph given in the above diagram</span><br><span class="line">    Graph g(6);</span><br><span class="line">    g.addEdge(5, 2);</span><br><span class="line">    g.addEdge(5, 0);</span><br><span class="line">    g.addEdge(4, 0);</span><br><span class="line">    g.addEdge(4, 1);</span><br><span class="line">    g.addEdge(2, 3);</span><br><span class="line">    g.addEdge(3, 1);</span><br><span class="line"> </span><br><span class="line">    cout &lt;&lt; &quot;Following is a Topological Sort of the given graph n&quot;;</span><br><span class="line">    g.topologicalSort();</span><br><span class="line"> </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<hr>
+<pre><code>// A C++ program to print topological sorting of a DAG
+#include&lt;iostream&gt;
+#include &lt;list&gt;
+#include &lt;stack&gt;
+using namespace std;
+
+// Class to represent a graph
+class Graph
+{
+    int V;    // No. of vertices&#39;
+
+    // Pointer to an array containing adjacency listsList
+    list&lt;int&gt; *adj;
+
+    // A function used by topologicalSort
+    void topologicalSortUtil(int v, bool visited[], stack&lt;int&gt; &amp;Stack);
+public:
+    Graph(int V);   // Constructor
+
+     // function to add an edge to graph
+    void addEdge(int v, int w);
+
+    // prints a Topological Sort of the complete graph
+    void topologicalSort();
+};
+
+Graph::Graph(int V)
+{
+    this-&gt;V = V;
+    adj = new list&lt;int&gt;[V];
+}
+
+void Graph::addEdge(int v, int w)
+{
+    adj[v].push_back(w); // Add w to v’s list.
+}
+
+// A recursive function used by topologicalSort
+void Graph::topologicalSortUtil(int v, bool visited[], 
+                                stack&lt;int&gt; &amp;Stack)
+{
+    // Mark the current node as visited.
+    visited[v] = true;
+
+    // Recur for all the vertices adjacent to this vertex
+    list&lt;int&gt;::iterator i;
+    for (i = adj[v].begin(); i != adj[v].end(); ++i)
+        if (!visited[*i])
+            topologicalSortUtil(*i, visited, Stack);
+
+    // Push current vertex to stack which stores result
+    Stack.push(v);
+}
+
+// The function to do Topological Sort. It uses recursive 
+// topologicalSortUtil()
+void Graph::topologicalSort()
+{
+    stack&lt;int&gt; Stack;
+
+    // Mark all the vertices as not visited
+    bool *visited = new bool[V];
+    for (int i = 0; i &lt; V; i++)
+        visited[i] = false;
+
+    // Call the recursive helper function to store Topological
+    // Sort starting from all vertices one by one
+    for (int i = 0; i &lt; V; i++)
+      if (visited[i] == false)
+        topologicalSortUtil(i, visited, Stack);
+
+    // Print contents of stack
+    while (Stack.empty() == false)
+    {
+        cout &lt;&lt; Stack.top() &lt;&lt; &quot; &quot;;
+        Stack.pop();
+    }
+}
+
+// Driver program to test above functions
+int main()
+{
+    // Create a graph given in the above diagram
+    Graph g(6);
+    g.addEdge(5, 2);
+    g.addEdge(5, 0);
+    g.addEdge(4, 0);
+    g.addEdge(4, 1);
+    g.addEdge(2, 3);
+    g.addEdge(3, 1);
+
+    cout &lt;&lt; &quot;Following is a Topological Sort of the given graph n&quot;;
+    g.topologicalSort();
+
+    return 0;
+}
+
+</code></pre><hr>
 
 
                 
@@ -242,7 +815,7 @@ DFS &amp;amp;BFSDFS
 
                     
                         <li>
-                            <a href="https://github.com/Britjeans" target="_blank">
+                            <a href="https://github.com/klugjo/hexo-theme-clean-blog" target="_blank">
                                 <span class="fa-stack fa-lg">
                                     <i class="fa fa-circle fa-stack-2x"></i>
                                     <i class="fa fa-github fa-stack-1x fa-inverse"></i>
