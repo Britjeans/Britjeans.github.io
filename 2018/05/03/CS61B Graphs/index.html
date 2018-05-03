@@ -10,14 +10,16 @@
 
     <!--Description-->
     
-        <meta name="description" content="5月完成CS61B的学习，每日一课
-2018-5-2整理图相关知识，熟悉相关代码
-2018-5-3刷leetcode上图相关题目5题
-2018-5-4刷leetcode上图相关题目2题
-刷leetcode上树相关题目2题
-完成CS61B Complexity一课内容
-整理树相关算法
-2018-5-6">
+        <meta name="description" content="CS61B Graphs
+
+Content
+
+A Programmer’s Specification
+Representing graphs
+Graph Algorithms
+Marking
+A general traversal schema
+Generic depth-first and br">
     
 
     <!--Author-->
@@ -27,7 +29,7 @@
 
     <!--Open Graph Title-->
     
-        <meta property="og:title" content="Study Dairy"/>
+        <meta property="og:title" content="CS61B Graphs"/>
     
 
     <!--Open Graph Description-->
@@ -49,7 +51,7 @@
 
     <!-- Title -->
     
-    <title>Study Dairy - Wanying Ding</title>
+    <title>CS61B Graphs - Wanying Ding</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
@@ -159,13 +161,13 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
-                    <h1>Study Dairy</h1>
+                    <h1>CS61B Graphs</h1>
                     
                     <span class="meta">
                         <!-- Date and Author -->
                         
                         
-                            2018-05-01
+                            2018-05-03
                         
                     </span>
                 </div>
@@ -186,7 +188,7 @@
                         
 
 
-<a href="/tags/Diary/">#Diary</a>
+<a href="/tags/Graph/">#Graph</a> <a href="/tags/CS61B/">#CS61B</a>
 
 
                     
@@ -201,23 +203,79 @@
 
             <!-- Post Main Content -->
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <p><strong>5月完成CS61B的学习，每日一课</strong></p>
-<p><strong>2018-5-2</strong><br>整理图相关知识，熟悉相关代码</p>
-<p><strong>2018-5-3</strong><br>刷leetcode上图相关题目5题</p>
-<p><strong>2018-5-4</strong><br>刷leetcode上图相关题目2题</p>
-<p>刷leetcode上树相关题目2题</p>
-<p>完成CS61B Complexity一课内容</p>
-<p>整理树相关算法</p>
-<p><strong>2018-5-6</strong><br>刷leetcode上树相关题目3题</p>
-<p>复习图相关知识</p>
-<p>CS61B</p>
-<p><strong>2018-5-7</strong><br>刷leetcode上题目5题</p>
-<p>CS61B</p>
-<p><strong>2018-5-6</strong><br>刷leetcode上树相关题目6题</p>
-<p>整理笔记</p>
-<p>CS61B</p>
-<p><strong>6月刷题300，每日刷题10</strong></p>
-<p><strong>7月复习巩固做过的题目300，每日刷题15</strong></p>
+                <p>CS61B Graphs</p>
+<hr>
+<p><strong>Content</strong></p>
+<ul>
+<li>A Programmer’s Specification</li>
+<li>Representing graphs</li>
+<li>Graph Algorithms<ul>
+<li>Marking</li>
+<li>A general traversal schema</li>
+<li>Generic depth-first and breadth-first traversal</li>
+<li>Topological sorting</li>
+<li>Minimum spanning trees</li>
+<li>Single-source shortest paths</li>
+<li>A* search</li>
+<li>Kruskal’s algorithm for MST</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>Lecture #33</strong></p>
+<p>Rrepresentaion</p>
+<ul>
+<li>Edge list representation</li>
+<li>Edge sets</li>
+<li>Adjacency matrix</li>
+</ul>
+<p>Topological Sorting</p>
+<ul>
+<li>Problem: Given a DAG, find a linear order of nodes consistent with the edges</li>
+</ul>
+<p>Shortest Paths: Dijkstra algorithm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PriorityQueue&lt;Vertex&gt; fringe;</span><br><span class="line">For each node v &#123;v.dist()=inf; v.back()=null;&#125;</span><br><span class="line">s.dist()=0;</span><br><span class="line">fringe =priority queue ordered by smallest.dist();</span><br><span class="line">add all vertices to fringe;</span><br><span class="line">while (!fringe.isEmpty())&#123;</span><br><span class="line">    Vertex v=fringe.removeFirst();</span><br><span class="line">    For each edge(v,w)&#123;</span><br><span class="line">        if(v.dist()+weight(v,w)&lt;w.dist())</span><br><span class="line">        &#123;w.dist()=v.dist()+weight(v,w);w.back()=v;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>Lecture #34</strong></p>
+<p><em>A* search, Minimum spanning trees, union-find</em></p>
+<ol>
+<li><em>A* search</em></li>
+</ol>
+<ul>
+<li>Dijkstra’s algorithm finds a shortest-path tree computing giving (backwards) shortest paths in a weighted graph from a given start- ing node to all other nodes. </li>
+<li>Time required =<ul>
+<li>Time to remove V nodes from priority queue + </li>
+<li>Time to update all neighbors of each of these nodes and add or reorder them in queue (E lg E) </li>
+<li>∈Θ(V lgV +ElgV)=Θ((V +E)lgV) </li>
+</ul>
+</li>
+<li><em>A* search</em> searches for a shortest path to a particular target node. </li>
+<li>Same as Dijkstra’s algorithm, except: <ul>
+<li>Stop when we take target from queue. </li>
+<li>Order queue by estimated distance to start + heuristic guess of remaining distance (h(v) = d(v, target))</li>
+<li>Heuristic must not overestimate distance and obey triangle in- equality (d(a, b) + d(b, c) ≥ d(a, c)).</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><p><em>Minimum Spanning Trees</em></p>
+<ul>
+<li><p>Problem: Given a set of places and distance between them (assume always positive), find a set of connecting roads of minimum total length that allows travel between any two</p>
+<p>Algorithm</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Prim</span></span><br><span class="line">PriorityQueue fringe;</span><br><span class="line">For each node v &#123;v.dist()=inf; v.parent()=<span class="keyword">null</span>;&#125;</span><br><span class="line">Choose an arbitrary starting node, s;</span><br><span class="line">s.dist() =<span class="number">0</span>;</span><br><span class="line">fringe= priority queue ordered by smallest.dist();</span><br><span class="line">add all vertices to fringe;</span><br><span class="line"><span class="keyword">while</span>(!fringe.isEmpty())&#123;</span><br><span class="line">    Vertex v=fringe.removeFirst();</span><br><span class="line">    <span class="function">For each <span class="title">edge</span><span class="params">(v,w)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(w∈ fringe &amp;&amp; weight(v,w)&lt;w.dist())</span><br><span class="line">        &#123; w.dist() =weight(v,w); w.parent()=v;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">Create <span class="title">one</span> <span class="params">(trivial)</span> subtree <span class="keyword">for</span> each node in the graph</span>;</span><br><span class="line">MST=&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//Kruskal</span><br><span class="line">for each edge(v,w), in increasing order of weight&#123;</span><br><span class="line">    if((v,w)connects two different subtrees)&#123;</span><br><span class="line">        Add (v,w) to MST;</span><br><span class="line">        Combine the two subtrees into one;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><em>Union Find</em></p>
+<p>Kruskal’s algorithm required that we have a set of sets of nodes with two operations:</p>
+<ul>
+<li>Find which of the set a given node belongs to</li>
+<li>Replace two sets with their union, reassigning all the nodes in the two original sets to this union.</li>
+</ul>
+<p>Kruskal’s algorithm required that we have a set of sets of nodes with two operations:</p>
+</li>
+</ol>
 
 
                 
