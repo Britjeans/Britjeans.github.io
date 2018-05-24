@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--Description-->
+    
+        <meta name="description" content="CS61B Graphs
+
+Content
+
+A Programmer’s Specification
+Representing graphs
+Graph Algorithms
+Marking
+A general traversal schema
+Generic depth-first and br">
+    
+
+    <!--Author-->
+    
+        <meta name="author" content="John Doe">
+    
+
+    <!--Open Graph Title-->
+    
+        <meta property="og:title" content="CS61B Graphs"/>
+    
+
+    <!--Open Graph Description-->
+    
+
+    <!--Open Graph Site Name-->
+    <meta property="og:site_name" content="Wanying Ding"/>
+
+    <!--Type page-->
+    
+        <meta property="og:type" content="article" />
+    
+
+    <!--Page Cover-->
+    
+
+        <meta name="twitter:card" content="summary" />
+    
+
+    <!-- Title -->
+    
+    <title>CS61B Graphs - Wanying Ding</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/style.css">
+
+    <!-- Custom Fonts -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Gallery -->
+    <link href="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.css" type="text/css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    
+
+
+    <!-- favicon -->
+    
+	
+</head>
+
+
+<body>
+
+    <!-- Menu -->
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Algorithms</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    <li>
+                        <a href="/">
+                            
+                                Home
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/archives">
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/tags">
+                            
+                                Tags
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="/categories">
+                            
+                                Categories
+                            
+                        </a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/Britjeans">
+                            
+                                <i class="fa fa-github fa-stack-2x"></i>
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<!-- Set your background image for this header in your post front-matter: cover -->
+
+<header class="intro-header" style="background-image: url('http://www.codeblocq.com/assets/projects/hexo-theme-clean-blog/img/home-bg.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <h1>CS61B Graphs</h1>
+                    
+                    <span class="meta">
+                        <!-- Date and Author -->
+                        
+                        
+                            2018-05-03
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Tags and categories -->
+           
+                <div class="col-lg-4 col-lg-offset-2 col-md-5 col-md-offset-1 post-tags">
+                    
+                        
+
+
+<a href="/tags/CS61B/">#CS61B</a> <a href="/tags/Graph/">#Graph</a>
+
+
+                    
+                </div>
+                <div class="col-lg-4 col-md-5 post-categories">
+                    
+                </div>
+            
+
+            <!-- Gallery -->
+            
+
+            <!-- Post Main Content -->
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <p>CS61B Graphs</p>
+<hr>
+<p><strong>Content</strong></p>
+<ul>
+<li>A Programmer’s Specification</li>
+<li>Representing graphs</li>
+<li>Graph Algorithms<ul>
+<li>Marking</li>
+<li>A general traversal schema</li>
+<li>Generic depth-first and breadth-first traversal</li>
+<li>Topological sorting</li>
+<li>Minimum spanning trees</li>
+<li>Single-source shortest paths</li>
+<li>A* search</li>
+<li>Kruskal’s algorithm for MST</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>Lecture #33</strong></p>
+<p>Rrepresentaion</p>
+<ul>
+<li>Edge list representation</li>
+<li>Edge sets</li>
+<li>Adjacency matrix</li>
+</ul>
+<p>Topological Sorting</p>
+<ul>
+<li>Problem: Given a DAG, find a linear order of nodes consistent with the edges</li>
+</ul>
+<p>Shortest Paths: Dijkstra algorithm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PriorityQueue&lt;Vertex&gt; fringe;</span><br><span class="line">For each node v &#123;v.dist()=inf; v.back()=null;&#125;</span><br><span class="line">s.dist()=0;</span><br><span class="line">fringe =priority queue ordered by smallest.dist();</span><br><span class="line">add all vertices to fringe;</span><br><span class="line">while (!fringe.isEmpty())&#123;</span><br><span class="line">    Vertex v=fringe.removeFirst();</span><br><span class="line">    For each edge(v,w)&#123;</span><br><span class="line">        if(v.dist()+weight(v,w)&lt;w.dist())</span><br><span class="line">        &#123;w.dist()=v.dist()+weight(v,w);w.back()=v;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<p><strong>Lecture #34</strong></p>
+<p><em>A* search, Minimum spanning trees, union-find</em></p>
+<ol>
+<li><em>A* search</em></li>
+</ol>
+<ul>
+<li>Dijkstra’s algorithm finds a shortest-path tree computing giving (backwards) shortest paths in a weighted graph from a given start- ing node to all other nodes. </li>
+<li>Time required =<ul>
+<li>Time to remove V nodes from priority queue + </li>
+<li>Time to update all neighbors of each of these nodes and add or reorder them in queue (E lg E) </li>
+<li>∈Θ(V lgV +ElgV)=Θ((V +E)lgV) </li>
+</ul>
+</li>
+<li><em>A* search</em> searches for a shortest path to a particular target node. </li>
+<li>Same as Dijkstra’s algorithm, except: <ul>
+<li>Stop when we take target from queue. </li>
+<li>Order queue by estimated distance to start + heuristic guess of remaining distance (h(v) = d(v, target))</li>
+<li>Heuristic must not overestimate distance and obey triangle in- equality (d(a, b) + d(b, c) ≥ d(a, c)).</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li><p><em>Minimum Spanning Trees</em></p>
+<ul>
+<li><p>Problem: Given a set of places and distance between them (assume always positive), find a set of connecting roads of minimum total length that allows travel between any two</p>
+<p>Algorithm</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Prim</span></span><br><span class="line">PriorityQueue fringe;</span><br><span class="line">For each node v &#123;v.dist()=inf; v.parent()=<span class="keyword">null</span>;&#125;</span><br><span class="line">Choose an arbitrary starting node, s;</span><br><span class="line">s.dist() =<span class="number">0</span>;</span><br><span class="line">fringe= priority queue ordered by smallest.dist();</span><br><span class="line">add all vertices to fringe;</span><br><span class="line"><span class="keyword">while</span>(!fringe.isEmpty())&#123;</span><br><span class="line">    Vertex v=fringe.removeFirst();</span><br><span class="line">    <span class="function">For each <span class="title">edge</span><span class="params">(v,w)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(w∈ fringe &amp;&amp; weight(v,w)&lt;w.dist())</span><br><span class="line">        &#123; w.dist() =weight(v,w); w.parent()=v;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">Create <span class="title">one</span> <span class="params">(trivial)</span> subtree <span class="keyword">for</span> each node in the graph</span>;</span><br><span class="line">MST=&#123;&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//Kruskal</span><br><span class="line">for each edge(v,w), in increasing order of weight&#123;</span><br><span class="line">    if((v,w)connects two different subtrees)&#123;</span><br><span class="line">        Add (v,w) to MST;</span><br><span class="line">        Combine the two subtrees into one;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><em>Union Find</em></p>
+<p>Kruskal’s algorithm required that we have a set of sets of nodes with two operations:</p>
+<ul>
+<li>Find which of the set a given node belongs to</li>
+<li>Replace two sets with their union, reassigning all the nodes in the two original sets to this union.</li>
+</ul>
+<p>Kruskal’s algorithm required that we have a set of sets of nodes with two operations:</p>
+</li>
+</ol>
+
+
+                
+            </div>
+
+            <!-- Comments -->
+            
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+
+                </div>
+            
+        </div>
+    </div>
+</article>
+
+    <!-- Footer -->
+    <hr />
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+
+                    
+
+                    
+                        <li>
+                            <a href="https://github.com/Britjeans" target="_blank">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    
+
+                    
+
+                    
+
+                    
+                </ul>
+                <p class="copyright text-muted">&copy; 2018 John Doe<br></p>
+                <p class="copyright text-muted">Original Theme <a target="_blank" href="http://startbootstrap.com/template-overviews/clean-blog/">Clean Blog</a> from <a href="http://startbootstrap.com/" target="_blank">Start Bootstrap</a></p>
+                <p class="copyright text-muted">Adapted for <a target="_blank" href="https://hexo.io/">Hexo</a> by <a href="http://www.codeblocq.com/" target="_blank">Jonathan Klughertz</a></p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- After footer scripts -->
+    
+<!-- jQuery -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+
+<!-- Bootstrap -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<!-- Gallery -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/featherlight/1.3.5/featherlight.min.js" type="text/javascript" charset="utf-8"></script>
+
+<!-- Disqus Comments -->
+
+
+
+</body>
+
+</html>
